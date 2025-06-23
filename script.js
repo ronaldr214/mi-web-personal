@@ -1,34 +1,77 @@
 document.addEventListener('DOMContentLoaded', function() {
 
-    // Registra el plugin de ScrollTrigger
+    // Registra el plugin de ScrollTrigger para las animaciones al hacer scroll
     gsap.registerPlugin(ScrollTrigger);
 
-    // --- Animación de Entrada para el Hero ---
-    gsap.set('.hero-text-panel > *', { autoAlpha: 0, y: 30 });
-    gsap.set('.hero-image-panel', { autoAlpha: 0, x: '100%' });
-    gsap.set('.logo, .nav-links li', { autoAlpha: 0, y: -20 });
+    // --- Animación de Entrada para el Hero (Reescrita para ser más segura) ---
+    // En lugar de ocultar todo primero, animamos cada elemento desde un estado inicial.
+    // Esto asegura que si algo falla, el contenido al menos será visible.
 
-    const heroTl = gsap.timeline({ defaults: { ease: 'power3.out' } });
+    // El panel de la imagen se desliza desde la derecha
+    gsap.from(".hero-image-panel", { 
+        duration: 1.2, 
+        x: '100%', // Empieza fuera de la pantalla a la derecha
+        ease: 'power3.out',
+        delay: 0.2 // Un pequeño retraso para asegurar que todo esté cargado
+    });
 
-    heroTl.to('.hero-image-panel', { duration: 1.5, autoAlpha: 1, x: '0%' })
-          .to('.hero-text-panel h1', { duration: 0.8, autoAlpha: 1, y: 0 }, "-=1.2")
-          .to('.hero-text-panel p', { duration: 0.8, autoAlpha: 1, y: 0 }, "-=0.8")
-          .to('.hero-text-panel .cta-button', { duration: 0.8, autoAlpha: 1, y: 0 }, "-=0.6")
-          .to('.logo', { duration: 0.5, autoAlpha: 1, y: 0 }, "-=0.5")
-          .to('.nav-links li', { duration: 0.5, autoAlpha: 1, y: 0, stagger: 0.1 }, "<");
+    // El texto aparece con un ligero retraso y escalonamiento
+    gsap.from(".hero-text-panel > *", {
+        duration: 1,
+        y: 40, // Empiezan 40px más abajo
+        opacity: 0, // Empiezan invisibles
+        stagger: 0.2, // Cada elemento aparece 0.2s después del anterior
+        ease: 'power3.out',
+        delay: 0.5 // Empieza después de que la imagen comience a moverse
+    });
 
-    
-    // --- NUEVO: Animación para las Tarjetas de Servicio ---
+    // La navegación aparece desde arriba
+    gsap.from(".main-header", {
+        duration: 1,
+        y: -100, // Empieza 100px por encima
+        opacity: 0,
+        ease: 'power3.out',
+        delay: 0.8
+    });
+
+
+    // --- Animación para las Tarjetas de Servicio (Ya era segura, pero la mantenemos consistente) ---
     gsap.from(".service-card", {
         scrollTrigger: {
             trigger: ".services-section", // El elemento que dispara la animación
             start: "top 80%", // Empieza cuando el 80% de la ventana ha alcanzado la sección
-            toggleActions: "play none none none" // La animación solo se ejecuta una vez
+            toggleActions: "play none none none" 
         },
         duration: 0.8,
         y: 50,
         opacity: 0,
         stagger: 0.2, // Anima cada tarjeta con 0.2s de diferencia
+        ease: 'power3.out'
+    });
+
+    // --- Animación para la Sección Sobre Mí ---
+    gsap.from(".about-main-profile", {
+        scrollTrigger: {
+            trigger: ".about-section",
+            start: "top 70%",
+            toggleActions: "play none none none"
+        },
+        duration: 1,
+        x: -100, // Entra desde la izquierda
+        opacity: 0,
+        ease: 'power3.out'
+    });
+
+    gsap.from(".team-member-card", {
+        scrollTrigger: {
+            trigger: ".team-grid",
+            start: "top 80%",
+            toggleActions: "play none none none"
+        },
+        duration: 0.7,
+        y: 50,
+        opacity: 0,
+        stagger: 0.2,
         ease: 'power3.out'
     });
 
