@@ -90,3 +90,112 @@ body { font-family: var(--font-family); background-color: var(--dark-blue); colo
 .main-footer { padding: 50px 20px; background-color: var(--dark-blue); text-align: center; border-top: 1px solid var(--dark-blue-light); }
 .social-links { margin-bottom: 20px; }
 .social-links a { color: var(--off-white); font-size: 1.6rem; margin: 0 15px; text-decoration: none; display: inline-block; transition: color 0.3s ease, transform 0.3s ease; }
+/* ... (Todo el CSS que ya tenías se mantiene igual hasta la sección de responsividad) ... */
+/* ... */
+
+/* --- Responsividad General --- */
+
+/* Estilos para el menú de hamburguesa en pantallas móviles */
+.mobile-nav-toggle {
+    display: none; /* Oculto por defecto en desktop */
+    position: absolute;
+    z-index: 2000;
+    right: 2rem;
+    top: 2rem;
+    background: transparent;
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba(241, 241, 241, 1)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    width: 2rem;
+    height: 2rem;
+    border: 0;
+    cursor: pointer;
+}
+
+.mobile-nav-toggle[aria-expanded="true"] {
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba(241, 241, 241, 1)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M6 6l18 18M6 24L24 6'/%3e%3c/svg%3e");
+}
+
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0,0,0,0);
+    border: 0;
+}
+
+
+@media (max-width: 900px) {
+    .services-grid { grid-template-columns: 1fr; }
+    .about-main-profile { grid-template-columns: 1fr; text-align: center; }
+    .about-text .section-title.left-aligned, 
+    .about-text .section-title.left-aligned::after { margin-left: auto; margin-right: auto; }
+    .about-text .cta-button { align-self: center; }
+}
+
+@media (max-width: 850px) {
+    .nav-links {
+        position: fixed;
+        inset: 0 0 0 30%; /* El menú ocupará el 70% derecho de la pantalla */
+        flex-direction: column;
+        padding: min(20vh, 10rem) 2rem;
+        gap: 2rem;
+        background-color: hsl(0 0% 0% / 0.8); /* Fondo oscuro semitransparente */
+        backdrop-filter: blur(1rem);
+        transform: translateX(100%);
+        transition: transform 350ms ease-out;
+    }
+
+    .nav-links[data-visible="true"] {
+        transform: translateX(0%);
+    }
+
+    .mobile-nav-toggle {
+        display: block;
+    }
+
+    .hero-section {
+        grid-template-columns: 1fr;
+        height: auto;
+        min-height: 100vh;
+    }
+
+    .hero-text-panel {
+        order: 2;
+        padding: 50px 8%; /* Reducimos padding para dar más espacio */
+        text-align: center;
+    }
+    
+    /* CORRECCIÓN PARA EL TEXTO DESBORDADO */
+    .hero-text-panel h1 {
+        overflow-wrap: break-word;
+        word-wrap: break-word; /* Para navegadores más antiguos */
+        hyphens: auto; /* Opcional: para cortar palabras con guion */
+    }
+
+    .cta-button {
+        align-self: center;
+    }
+
+    .hero-image-panel {
+        order: 1;
+        height: 50vh;
+    }
+}
+
+@media (max-width: 700px) {
+    .team-grid {
+        grid-template-columns: 1fr;
+    }
+    .plans-grid {
+        grid-template-columns: 1fr;
+    }
+    .plan-card {
+        margin-bottom: 30px;
+    }
+    .plan-card.highlighted {
+        transform: scale(1);
+    }
+}
