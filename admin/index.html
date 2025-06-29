@@ -4,40 +4,11 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Administrador de Contenido</title>
+  <!-- Usar una versión estable de Decap CMS -->
+  <script src="https://unpkg.com/decap-cms@^2.10.192/dist/decap-cms.js"></script>
 </head>
 <body>
-  <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
-  <script>
-    CMS.init({
-      config: {
-        backend: {
-          name: 'git-gateway',
-          branch: 'main',
-        },
-        local_backend: true,
-        media_folder: "assets/img/uploads",
-        public_folder: "/assets/img/uploads",
-        collections: [
-          {
-            name: "blog",
-            label: "Artículos del Blog",
-            folder: "posts",
-            create: true,
-            slug: "{{year}}-{{month}}-{{day}}-{{slug}}",
-            fields: [
-              { label: "Título del Artículo", name: "title", widget: "string" },
-              { label: "Fecha de Publicación", name: "date", widget: "datetime" },
-              { label: "Imagen Destacada", name: "thumbnail", widget: "image", required: false },
-              { label: "Leyenda de la Imagen", name: "caption", widget: "string", required: false },
-              { label: "Crédito de la Foto", name: "credit", widget: "string", required: false },
-              { label: "Categoría", name: "category", widget: "string" },
-              { label: "Subtítulo (Opcional)", name: "subtitle", widget: "string", required: false },
-              { label: "Cuerpo del Artículo", name: "body", widget: "markdown" }
-            ]
-          }
-        ]
-      }
-    });
-  </script>
+  <!-- Este div es necesario para que Decap CMS se monte correctamente -->
+  <div id="nc-root"></div>
 </body>
 </html>
