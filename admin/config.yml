@@ -2,7 +2,8 @@ backend:
   name: github
   repo: ronaldr214/mi-web-personal
   branch: main
-
+  auth_type: pkce
+  open_authoring: true
 media_folder: "static/uploads"
 public_folder: "/uploads"
 
