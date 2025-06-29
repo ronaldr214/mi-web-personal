@@ -1,9 +1,9 @@
 backend:
-  name: github
-  repo: ronaldr214/mi-web-personal
+  name: git-gateway
   branch: main
-  auth_type: pkce
-  open_authoring: true
+
+publish_mode: editorial_workflow
+
 media_folder: "static/uploads"
 public_folder: "/uploads"
 
@@ -16,10 +16,18 @@ collections:
     fields:
       - {label: "Título", name: "title", widget: "string"}
       - {label: "Fecha", name: "date", widget: "datetime"}
-      - {label: "Borrador", name: "draft", widget: "boolean", default: false}
-      - {label: "Autor", name: "author", widget: "string", default: "Ronald Rangel"}
-      - {label: "Categorías", name: "categories", widget: "list", default: ["Personal"]}
-      - {label: "Etiquetas", name: "tags", widget: "list"}
-      - {label: "Imagen destacada", name: "image", widget: "image", required: false}
-      - {label: "Descripción", name: "description", widget: "text"}
+      - {label: "Descripción", name: "description", widget: "string"}
+      - {label: "Imagen destacada", name: "featured_image", widget: "image", required: false}
+      - {label: "Tags", name: "tags", widget: "list", required: false}
       - {label: "Contenido", name: "body", widget: "markdown"}
+  
+  - name: "pages"
+    label: "Páginas"
+    files:
+      - label: "Página de Inicio"
+        name: "home"
+        file: "content/home.md"
+        fields:
+          - {label: "Título", name: "title", widget: "string"}
+          - {label: "Subtítulo", name: "subtitle", widget: "string"}
+          - {label: "Contenido", name: "body", widget: "markdown"}
