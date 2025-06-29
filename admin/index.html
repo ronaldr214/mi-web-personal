@@ -3,10 +3,42 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Panel de Administración - Blog</title>
+  <title>Administrador de Contenido</title>
 </head>
 <body>
-  <!-- Include Netlify CMS -->
-  <script src="https://unpkg.com/netlify-cms@^2.0.0/dist/netlify-cms.js"></script>
+  <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
+  
+  <script>
+    CMS.init({
+      config: {
+        backend: {
+          name: 'git-gateway',
+          branch: 'main', 
+        },
+        media_folder: "assets/img/uploads",
+        public_folder: "/assets/img/uploads",
+        collections: [
+          {
+            name: "blog",
+            label: "Artículos del Blog",
+            folder: "posts",
+            create: true,
+            slug: "{{year}}-{{month}}-{{day}}-{{slug}}",
+            fields: [
+              { label: "Título", name: "title", widget: "string" },
+              { label: "Fecha de Publicación", name: "date", widget: "datetime" },
+              { label: "Imagen Destacada", name: "thumbnail", widget: "image" },
+              { label: "Leyenda de la Foto", name: "caption", widget: "string", required: false },
+              { label: "Crédito de la Foto", name: "credit", widget: "string", required: false },
+              { label: "Categoría", name: "category", widget: "string" },
+              { label: "Subtítulo", name: "subtitle", widget: "string", required: false },
+              { label: "Recuadro Destacado", name: "highlight_box", widget: "text", required: false },
+              { label: "Cuerpo del Artículo", name: "body", widget: "markdown" }
+            ]
+          }
+        ]
+      }
+    });
+  </script>
 </body>
 </html>
