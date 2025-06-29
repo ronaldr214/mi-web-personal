@@ -1,0 +1,54 @@
+---
+label: Blog Post
+hide_body: false
+fields:
+- type: text
+  name: title
+  label: Título
+  config:
+    required: true
+- type: datetime
+  name: date
+  label: Fecha
+  default: now
+  config:
+    required: true
+    date_format: 
+    time_format: 
+    display_utc: false
+- type: boolean
+  name: draft
+  label: Borrador
+  default: false
+- type: text
+  name: author
+  label: Autor
+  default: Ronald Rangel
+- type: list
+  name: categories
+  label: Categorías
+  config:
+    use_select: true
+    source:
+      type: simple
+    options:
+    - Personal
+    - Tecnología
+    - Desarrollo Web
+    - Proyectos
+    - Tutoriales
+- type: tag_list
+  name: tags
+  label: Etiquetas
+- type: file
+  name: image
+  label: Imagen destacada
+- type: textarea
+  name: description
+  label: Descripción
+  config:
+    wysiwyg: false
+    schema:
+      format: markdown
+pages:
+- content/blog/mi-primer-post.md
