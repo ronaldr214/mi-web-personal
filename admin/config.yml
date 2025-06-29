@@ -1,0 +1,24 @@
+backend:
+  name: github
+  repo: ronaldr214/mi-web-personal
+  branch: main
+
+media_folder: "static/uploads"
+public_folder: "/uploads"
+
+collections:
+  - name: "blog"
+    label: "Blog Posts"
+    folder: "content/blog"
+    create: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    fields:
+      - {label: "Título", name: "title", widget: "string"}
+      - {label: "Fecha", name: "date", widget: "datetime"}
+      - {label: "Borrador", name: "draft", widget: "boolean", default: false}
+      - {label: "Autor", name: "author", widget: "string", default: "Ronald Rangel"}
+      - {label: "Categorías", name: "categories", widget: "list", default: ["Personal"]}
+      - {label: "Etiquetas", name: "tags", widget: "list"}
+      - {label: "Imagen destacada", name: "image", widget: "image", required: false}
+      - {label: "Descripción", name: "description", widget: "text"}
+      - {label: "Contenido", name: "body", widget: "markdown"}
