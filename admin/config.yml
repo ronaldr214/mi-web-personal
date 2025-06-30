@@ -17,4 +17,9 @@ collections:
       - { label: "Categoría", name: "categoria", widget: "select", options: ["Desarrollo Web", "Branding", "Inteligencia Artificial", "Marketing", "Emprendimiento"] }
       - { label: "Fecha de publicación", name: "fecha", widget: "date" }
       - { label: "Autor", name: "autor", widget: "string", default: "Ronald Rangel" }
-      - { label: "Destacado", name: "destac
+      - { label: "Destacado", name: "destacado", widget: "boolean", default: false, hint: "¿Mostrar en la página principal?" }
+      - { label: "Imagen principal", name: "imagen_principal", widget: "image", required: false }
+      - { label: "Resumen", name: "resumen", widget: "text", hint: "Descripción corta del artículo (máx. 160 caracteres)" }
+      - { label: "Contenido", name: "contenido", widget: "markdown" }
+      - { label: "SEO Title", name: "seo_title", widget: "string", required: false, hint: "Título para SEO (opcional)" }
+      - { label: "SEO Description", name: "seo_description", widget: "text", required: false, hint: "Descripción para SEO (opcional)" }
