@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Blog - Ronald Rangel, Estratega Digital</title>
+    <title>Blog de Estrategia Digital - Ronald Rangel</title>
     <meta name="description" content="Análisis, guías y consejos prácticos para potenciar tu marca en el mundo digital.">
     <link rel="icon" type="image/webp" href="/favicon.webp">
     <link rel="stylesheet" href="/style.css">
@@ -28,18 +28,17 @@
                 <div class="filter-controls">
                     <div class="search-box">
                         <input type="text" id="searchInput" placeholder="Buscar artículos...">
-                        <button onclick="searchPosts()">Buscar</button>
                     </div>
                     <div class="category-filters" id="category-filters-container">
                         <button class="filter-btn active" data-category="all">Todos</button>
-                        </div>
+                    </div>
                 </div>
             </div>
         </section>
 
-        <section class="blog-list-section">
+        <section class="blog-posts">
             <div class="container">
-                <div class="blog-grid" id="blog-posts-container">
+                <div id="postsContainer" class="posts-grid">
                     </div>
             </div>
         </section>
@@ -50,5 +49,6 @@
 
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
     <script src="/blog.js"></script>
+    <script src="/script.js"></script>
 </body>
 </html>
