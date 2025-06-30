@@ -1,0 +1,16 @@
+[
+  {
+    "titulo": "El Segundo Round: Cómo Usar los Errores de tu Primer Negocio como Arma Secreta",
+    "slug": "2025-06-29-el-segundo-round",
+    "imagen_principal": "/uploads/ia-emprendimiento.jpg",
+    "categoria": "Emprendimiento Digital",
+    "destacado": true
+  },
+  {
+    "titulo": "Otro Post de Prueba",
+    "slug": "2025-06-30-otro-post",
+    "imagen_principal": "/uploads/otra-imagen.jpg",
+    "categoria": "Innovación",
+    "destacado": true
+  }
+]
