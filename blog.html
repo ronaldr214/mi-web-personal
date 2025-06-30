@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="es-CO">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog - Ronald Rangel | Estratega Digital</title>
+    <meta name="description" content="Artículos sobre desarrollo web, branding, inteligencia artificial y estrategia digital para emprendedores.">
+    <link rel="icon" type="image/webp" href="assets/favicon.webp">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .blog-header {
+            background: linear-gradient(135deg, #0a1425 0%, #1a2f47 100%);
+            padding: 6rem 0 4rem;
+            text-align: center;
+        }
+        .blog-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            padding: 4rem 1rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .blog-card {
+            background: #0e1e2e;
+            border-radius: 1rem;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(0, 255, 255, 0.1);
+        }
+        .blog-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 255, 255, 0.1);
+            border-color: rgba(0, 255, 255, 0.3);
+        }
+        .blog-image {
+            height: 200px;
+            background-size: cover;
+            background-position: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .blog-image::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(180deg, transparent 0%, rgba(14, 30, 46, 0.7) 100%);
+        }
+        .blog-content {
+            padding: 1.5rem;
+        }
+        .blog-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+        .blog-category {
+            background: rgba(0, 255, 255, 0.1);
+            color: #00ffff;
+            padding: 0.25rem 0.75rem;
+            border-radius: 1rem;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+        .blog-date {
+            color: #94a3b8;
+            font-size: 0.9rem;
+        }
+        .blog-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: white;
+            margin: 0.5rem 0 1rem;
+            line-height: 1.3;
+        }
+        .blog-excerpt {
+            color: #94a3b8;
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+        .blog-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: #00ffff;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        .blog-link:hover {
+            transform: translateX(5px);
+        }
+        .filter-section {
+            background: #0a1425;
+            padding: 2rem 0;
+            text-align: center;
+        }
+        .filter-buttons {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        .filter-btn {
+            background: transparent;
+            border: 2px solid rgba(0, 255, 255, 0.3);
+            color: #94a3b8;
+            padding: 0.75rem 1.5rem;
+            border-radius: 2rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .filter-btn.active,
+        .filter-btn:hover {
+            background: rgba(0, 255, 255, 0.1);
+            border-color: #00ffff;
+            color: #00ffff;
+        }
+    </style>
+</head>
+<body>
+
+<header class="main-header">
+    <nav class="main-nav container">
+        <div class="logo"><a href="/"><img src="assets/logo.webp" alt="Logo Ronald Rangel"></a></div>
+        <div class="nav-menu">
+            <ul class="nav-links">
+                <li><a href="/">Inicio</a></li>
+                <li><a href="/#servicios">Servicios</a></li>
+                <li><a href="/#planes">Planes</a></li>
+                <li><a href="/#sobre-mi">Sobre Mí</a></li>
+                <li><a href="/blog" class="active">Blog</a></li>
+                <li><a href="/#contacto">Contacto</a></li>
+            </ul>
+        </div>
+    </nav>
+</header>
+
+<main>
+    <section class="blog-header">
+        <div class="container">
+            <h1>Blog de Estrategia Digital</h1>
+            <p>Artículos, insights y tendencias para impulsar tu negocio</p>
+        </div>
+    </section>
+
+    <section class="filter-section">
+        <div class="container">
+            <div class="filter-buttons">
+                <button class="filter-btn active" data-filter="all">Todos</button>
+                <button class="filter-btn" data-filter="Desarrollo Web">Desarrollo Web</button>
+                <button class="filter-btn" data-filter="Branding">Branding</button>
+                <button class="filter-btn" data-filter="Inteligencia Artificial">IA</button>
+                <button class="filter-btn" data-filter="Marketing">Marketing</button>
+            </div>
+        </div>
+    </section>
+
+    <section class="blog-section">
+        <div class="blog-grid" id="blog-grid">
+            <!-- Los posts se cargarán aquí dinámicamente -->
+        </div>
+    </section>
+</main>
+
+<footer class="main-footer">
+    <div class="container">
+        <div class="social-links">
+            <a href="#"><i class="fa-brands fa-linkedin-in"></i></a>
+            <a href="#"><i class="fa-brands fa-youtube"></i></a>
+            <a href="#"><i class="fa-brands fa-twitter"></i></a>
+            <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
+        </div>
+        <p class="copyright-text">© 2025 Ronald Rangel. Todos los derechos reservados.</p>
+    </div>
+</footer>
+
+<a href="https://wa.me/573002278962" target="_blank" class="floating-whatsapp">
+    <i class="fa-brands fa-whatsapp"></i><span>Hablemos</span>
+</a>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+    let allPosts = [];
+    const blogGrid = document.getElementById("blog-grid");
+    const filterButtons = document.querySelectorAll(".filter-btn");
+
+    // Cargar posts
+    fetch("posts.json")
+        .then(response => response.json())
+        .then(posts => {
+            allPosts = posts;
+            displayPosts(posts);
+        })
+        .catch(error => {
+            console.error("Error cargando los posts:", error);
+            blogGrid.innerHTML = '<p style="text-align: center; color: #94a3b8;">Error cargando los artículos. Intenta más tarde.</p>';
+        });
+
+    // Función para mostrar posts
+    function displayPosts(posts) {
+        blogGrid.innerHTML = "";
+        
+        if (posts.length === 0) {
+            blogGrid.innerHTML = '<p style="text-align: center; color: #94a3b8;">No se encontraron artículos.</p>';
+            return;
+        }
+
+        posts.forEach(post => {
+            const postDate = new Date(post.fecha).toLocaleDateString('es-CO', {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric'
+            });
+
+            const card = document.createElement("article");
+            card.className = "blog-card";
+            card.innerHTML = `
+                <div class="blog-image" style="background-image: url('${post.imagen_principal || 'assets/blog-placeholder.webp'}');"></div>
+                <div class="blog-content">
+                    <div class="blog-meta">
+                        <span class="blog-category">${post.categoria}</span>
+                        <span class="blog-date">${postDate}</span>
+                    </div>
+                    <h2 class="blog-title">${post.titulo}</h2>
+                    <p class="blog-excerpt">${post.resumen}</p>
+                    <a href="/blog/${post.slug}" class="blog-link">
+                        Leer artículo <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+            `;
+            blogGrid.appendChild(card);
+        });
+    }
+
+    // Filtros
+    filterButtons.forEach(btn => {
+        btn.addEventListener("click", () => {
+            // Actualizar botón activo
+            filterButtons.forEach(b => b.classList.remove("active"));
+            btn.classList.add("active");
+
+            // Filtrar posts
+            const filter = btn.dataset.filter;
+            const filteredPosts = filter === "all" 
+                ? allPosts 
+                : allPosts.filter(post => post.categoria === filter);
+            
+            displayPosts(filteredPosts);
+        });
+    });
+});
+</script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="script.js"></script>
+
+</body>
+</html>
