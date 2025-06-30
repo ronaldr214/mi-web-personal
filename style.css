@@ -1,7 +1,3 @@
-/* ==========================================================================
-   ESTILOS FINALES Y COMPLETOS
-   ========================================================================== */
-
 /* --- Variables y Estilos Base --- */
 :root {
     --dark-blue: #1e2c3a;
@@ -11,57 +7,23 @@
     --grey-text: #8899a6;
     --font-family: 'Poppins', sans-serif;
 }
+
 * { margin: 0; padding: 0; box-sizing: border-box; }
 html { scroll-behavior: smooth; }
 body { font-family: var(--font-family); background-color: var(--dark-blue); color: var(--off-white); overflow-x: hidden; }
+
+/* --- Contenedores y Títulos --- */
 .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
 .section-title { font-size: clamp(2rem, 4vw, 3rem); font-weight: 900; text-align: center; margin-bottom: 60px; }
 .section-title.left-aligned { text-align: left; margin: 0 0 20px 0; }
 .section-title.left-aligned::after { margin: 15px 0 0 0; }
 .section-title::after { content: ''; display: block; width: 80px; height: 4px; background-color: var(--cyan); margin: 15px auto 0; border-radius: 2px; }
+
+/* --- Botones --- */
 .cta-button { background-color: var(--cyan); color: var(--dark-blue); padding: 15px 30px; border-radius: 50px; text-decoration: none; font-weight: 700; text-align: center; align-self: flex-start; transition: transform 0.3s ease, box-shadow 0.3s ease; display: inline-block; }
 .cta-button:hover { transform: scale(1.05); box-shadow: 0 10px 20px rgba(66, 193, 213, 0.2); }
 
-/* --- Barra de Navegación (con menú a la derecha) --- */
-.main-header { position: absolute; top: 0; left: 0; width: 100%; z-index: 100; padding: 20px 5%; }
-.main-nav { display: flex; justify-content: space-between; align-items: center; }
+/* --- Cabecera y Navegación --- */
+.main-header, .header { position: absolute; top: 0; left: 0; width: 100%; z-index: 100; padding: 20px 5%; }
+.main-header .container, .header .container { display: flex; justify-content: space-between; align-items: center; }
 .logo img { height: 70px;  transition: transform 0.3s ease-in-out; }
-.logo:hover img { transform: translateY(-4px); }
-.nav-links { list-style: none; display: flex; gap: 30px; }
-.nav-links a { color: var(--off-white); text-decoration: none; font-weight: 700; transition: color 0.3s ease; }
-.nav-links a:hover { color: var(--cyan); }
-
-/* --- Secciones Principales (Hero, Servicios, etc.) --- */
-/* (Estos estilos se mantienen igual, asegúrate de tenerlos en tu archivo) */
-
-/* --- ESTILOS PARA EL BLOG (CORREGIDOS Y MEJORADOS) --- */
-.blog-hero {
-    padding: 180px 20px 100px 20px;
-    text-align: center;
-    position: relative;
-    background-color: var(--dark-blue);
-    background-image: linear-gradient(rgba(30, 44, 58, 0.9), rgba(30, 44, 58, 1)), url('/hero-photo.webp');
-    background-size: cover;
-    background-position: center 40%;
-}
-.blog-hero h1 { font-size: clamp(2.8rem, 6vw, 4.5rem); font-weight: 900; color: var(--off-white); line-height: 1.1; }
-.blog-hero p { font-size: 1.2rem; color: var(--grey-text); max-width: 600px; margin: 15px auto 0; }
-.blog-list-section { padding: 100px 0; }
-.blog-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 40px; }
-.blog-card { background-color: var(--dark-blue-light); border-radius: 15px; overflow: hidden; display: flex; flex-direction: column; transition: transform 0.3s ease, box-shadow 0.3s ease; border: 1px solid #3a4a5a; }
-.blog-card:hover { transform: translateY(-10px); box-shadow: 0 20px 40px rgba(0,0,0,0.2); }
-.card-image-link { display: block; overflow: hidden; height: 220px; }
-.card-image-link img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.4s ease-out; }
-.blog-card:hover .card-image-link img { transform: scale(1.05); }
-.card-content { padding: 30px; display: flex; flex-direction: column; flex-grow: 1; text-align: left; }
-.card-category { display: inline-block; background-color: var(--cyan); color: var(--dark-blue); padding: 5px 12px; border-radius: 50px; font-size: 0.8rem; font-weight: 700; margin-bottom: 15px; align-self: flex-start; }
-.card-content h3 { font-size: 1.4rem; margin-bottom: 15px; line-height: 1.4; }
-.card-content h3 a { color: var(--off-white); text-decoration: none; transition: color 0.3s ease; }
-.card-content h3 a:hover { color: var(--cyan); }
-.card-content p { color: var(--grey-text); flex-grow: 1; margin-bottom: 25px; font-size: 0.95rem; }
-.card-read-more { color: var(--cyan); text-decoration: none; font-weight: 700; align-self: flex-start; display: inline-flex; align-items: center; }
-.card-read-more i { margin-left: 8px; transition: transform 0.3s ease; }
-.card-read-more:hover i { transform: translateX(5px); }
-
-/* --- Página de Artículo Individual --- */
-/* (El resto de los estilos del blog y responsividad se mantienen igual) */
