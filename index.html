@@ -1,81 +1,26 @@
-<!-- index.html ACTUALIZADO CON SECCIÓN DE BLOG DINÁMICO -->
 <!DOCTYPE html>
-<html lang="es-CO">
+<html lang="es">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Ronald Rangel - Estratega Digital | Desarrollo Web, Branding & IA</title>
-  <meta name="description" content="Acompaño a emprendedores a potenciar su negocio con desarrollo web estratégico, branding con propósito y asesorías en inteligencia artificial en Colombia." />
-  <meta name="keywords" content="Desarrollo web en Colombia para emprendedores, asesor de marca personal, consultor de inteligencia artificial, marketing para startups, estratega digital" />
-  <meta property="og:title" content="Ronald Rangel - Estratega Digital" />
-  <meta property="og:description" content="Las marcas no se improvisan, se construyen con estrategia." />
-  <meta property="og:image" content="assets/social-share.webp" />
-  <meta property="og:url" content="https://www.ronaldrangel.com.co" />
-  <meta property="og:type" content="website" />
-  <link rel="icon" type="image/webp" href="assets/favicon.webp" />
-  <link rel="apple-touch-icon" href="assets/favicon.webp" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700;900&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
-  <link rel="stylesheet" href="style.css" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Ronald Rangel | Comunicación Digital</title>
+  <link rel="stylesheet" href="style.css"/>
+  <script defer src="script.js"></script>
 </head>
 <body>
-  <!-- Header y secciones anteriores igual -->
+  <header class="hero">
+    <!-- Contenido del Hero original -->
+  </header>
 
-  <!-- Nueva sección blog reemplazada -->
-  <section id="featured-posts" class="section-blog" style="padding: 4rem 1rem; background-color: #0f1c2f;">
-    <div class="container" style="max-width: 1200px; margin: auto;">
-      <h2 style="color: white; font-size: 2rem; text-align: center; margin-bottom: 2rem;">Desde mi blog</h2>
-      <div class="blog-grid" id="blogGrid" style="display: grid; gap: 2rem; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));"></div>
-    </div>
+  <!-- Sección Blog -->
+  <section class="blog-section" style="background-color: #1f2c3b; padding: 4rem 1rem;">
+    <h2 style="text-align: center; color: #fff; font-size: 2.5rem; margin-bottom: 2rem;">Desde mi blog</h2>
+    <div id="blog-cards" class="blog-grid"></div>
   </section>
 
-  <script>
-    document.addEventListener("DOMContentLoaded", () => {
-      fetch('/posts.json')
-        .then(res => res.json())
-        .then(posts => {
-          const blogGrid = document.getElementById("blogGrid");
-          posts.filter(p => p.destacado).forEach(post => {
-            const card = document.createElement("div");
-            card.className = "blog-card";
-            card.style = `
-              background: #111c2d;
-              color: white;
-              border-radius: 12px;
-              overflow: hidden;
-              box-shadow: 0 8px 24px rgba(0,0,0,0.2);
-              transform: translateY(20px);
-              opacity: 0;
-              transition: all 0.3s ease;
-            `;
-            card.innerHTML = `
-              <img src="${post.imagen_principal}" alt="${post.titulo}" style="width: 100%; height: 180px; object-fit: cover; display: block;">
-              <div style="padding: 1.2rem;">
-                <span style="font-size: 0.85rem; color: #00ffff; font-weight: 600;">${post.categoria}</span>
-                <h3 style="font-size: 1.2rem; color: white; margin: 0.5rem 0;">${post.titulo}</h3>
-                <a href="/blog/${post.slug}" style="color: #00ffff; text-decoration: none; font-weight: bold;">Leer más →</a>
-              </div>
-            `;
-            blogGrid.appendChild(card);
-            if (window.gsap) {
-              gsap.to(card, {
-                opacity: 1,
-                y: 0,
-                duration: 0.6,
-                ease: "power2.out"
-              });
-            } else {
-              card.style.opacity = 1;
-              card.style.transform = "translateY(0)";
-            }
-          });
-        })
-        .catch(err => console.error("Error al cargar posts.json:", err));
-    });
-  </script>
-
-  <!-- Footer y scripts igual -->
+  <!-- Sección Misión (contenido existente) -->
+  <section class="mision-section">
+    <!-- Tu bloque de 'Mi Misión es Verte Crecer' va aquí -->
+  </section>
 </body>
 </html>
