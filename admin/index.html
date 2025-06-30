@@ -1,101 +1,25 @@
-<!DOCTYPE html>
-<html lang="es">
+<!doctype html>
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Panel - Test</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            max-width: 800px;
-            margin: 50px auto;
-            padding: 20px;
-            background-color: #f5f5f5;
-        }
-        .admin-container {
-            background: white;
-            padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-        }
-        h1 {
-            color: #333;
-            text-align: center;
-        }
-        .status {
-            background: #d4edda;
-            color: #155724;
-            padding: 15px;
-            border-radius: 5px;
-            margin: 20px 0;
-        }
-        .nav-link {
-            display: inline-block;
-            background: #007bff;
-            color: white;
-            padding: 10px 20px;
-            text-decoration: none;
-            border-radius: 5px;
-            margin-top: 20px;
-        }
-        .nav-link:hover {
-            background: #0056b3;
-        }
-        .debug-info {
-            background: #f8f9fa;
-            border: 1px solid #dee2e6;
-            padding: 15px;
-            border-radius: 5px;
-            margin-top: 20px;
-            font-family: monospace;
-            font-size: 14px;
-        }
-    </style>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Content Manager</title>
+  <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
 </head>
 <body>
-    <div class="admin-container">
-        <h1>🛠️ Panel de Administración</h1>
-        
-        <div class="status">
-            ✅ La página admin está funcionando correctamente
-        </div>
-        
-        <h2>Información de Debug:</h2>
-        <div class="debug-info">
-            <strong>URL actual:</strong> <span id="current-url"></span><br>
-            <strong>Timestamp:</strong> <span id="timestamp"></span><br>
-            <strong>User Agent:</strong> <span id="user-agent"></span>
-        </div>
-        
-        <h2>Navegación:</h2>
-        <a href="../index.html" class="nav-link">🏠 Volver al Inicio</a>
-        <a href="../blog.html" class="nav-link">📝 Blog</a>
-        
-        <h2>Funciones Admin:</h2>
-        <div style="margin-top: 20px;">
-            <button onclick="testFunction()" style="background: #28a745; color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer;">
-                Probar JavaScript
-            </button>
-            <div id="test-result" style="margin-top: 10px;"></div>
-        </div>
-    </div>
-
-    <script>
-        // Debug info
-        document.getElementById('current-url').textContent = window.location.href;
-        document.getElementById('timestamp').textContent = new Date().toLocaleString();
-        document.getElementById('user-agent').textContent = navigator.userAgent.substring(0, 50) + '...';
-        
-        // Test function
-        function testFunction() {
-            const result = document.getElementById('test-result');
-            result.innerHTML = '<div style="background: #d1ecf1; color: #0c5460; padding: 10px; border-radius: 5px; margin-top: 10px;">✅ JavaScript funciona correctamente!</div>';
-            console.log('Admin panel test function executed successfully');
+  <!-- Include the script that builds the page and powers Netlify CMS -->
+  <script src="https://unpkg.com/netlify-cms@^2.0.0/dist/netlify-cms.js"></script>
+  
+  <script>
+    if (window.netlifyIdentity) {
+      window.netlifyIdentity.on("init", user => {
+        if (!user) {
+          window.netlifyIdentity.on("login", () => {
+            document.location.href = "/admin/";
+          });
         }
-        
-        // Log successful load
-        console.log('Admin panel loaded at:', new Date().toISOString());
-        console.log('Current URL:', window.location.href);
-    </script>
+      });
+    }
+  </script>
 </body>
 </html>
