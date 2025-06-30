@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="es-CO">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title id="post-title">Cargando... | Ronald Rangel</title>
+    <meta name="description" id="post-description" content="">
+    <link rel="icon" type="image/webp" href="../assets/favicon.webp">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link rel="stylesheet" href="../style.css">
+    <style>
+        .post-header {
+            background: linear-gradient(135deg, #0a1425 0%, #1a2f47 100%);
+            padding: 6rem 0 2rem;
+        }
+        .post-meta-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        .post-category-badge {
+            background: rgba(0, 255, 255, 0.1);
+            color: #00ffff;
+            padding: 0.5rem 1rem;
+            border-radius: 2rem;
+            font-size: 0.9rem;
+            font-weight: 600;
+            display: inline-block;
+            margin-bottom: 1rem;
+        }
+        .post-title {
+            font-size: 2.5rem;
+            font-weight: 900;
+            color: white;
+            margin: 1rem 0;
+            line-height: 1.2;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .post-meta {
+            color: #94a3b8;
+            font-size: 1rem;
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+        .post-featured-image {
+            max-width: 1000px;
+            margin: 0 auto;
+            border-radius: 1rem;
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+        .post-featured-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        .post-content {
+            max-width: 800px;
+            margin: 4rem auto;
+            padding: 0 2rem;
+            color: #e2e8f0;
+            line-height: 1.8;
+            font-size: 1.1rem;
+        }
+        .post-content h1,
+        .post-content h2,
+        .post-content h3 {
+            color: white;
+            margin: 2rem 0 1rem;
+        }
+        .post-content h1 {
+            font-size: 2rem;
+            border-bottom: 2px solid #00ffff;
+            padding-bottom: 0.5rem;
+        }
+        .post-content h2 {
+            font-size: 1.6rem;
+        }
+        .post-content h3 {
+            font-size: 1.3rem;
+        }
+        .post-content p {
+            margin: 1rem 0;
+        }
+        .post-content ul,
+        .post-content ol {
+            margin: 1rem 0;
+            padding-left: 2rem;
+        }
+        .post-content li {
+            margin: 0.5rem 0;
+        }
+        .post-content blockquote {
+            border-left: 4px solid #00ffff;
+            padding: 1rem 2rem;
+            margin: 2rem 0;
+            background: rgba(0, 255, 255, 0.05);
+            border-radius: 0 0.5rem 0.5rem 0;
+            font-style: italic;
+        }
+        .post-content code {
+            background: rgba(0, 255, 255, 0.1);
+            color: #00ffff;
+            padding: 0.25rem 0.5rem;
+            border-radius: 0.25rem;
+            font-family: 'Courier New', monospace;
+        }
+        .post-content pre {
+            background: #0a1425;
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            overflow-x: auto;
+            margin: 2rem 0;
+        }
+        .post-content img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 0.5rem;
+            margin: 2rem auto;
+            display: block;
+        }
+        .back-to-blog {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: #00ffff;
+            text-decoration: none;
+            font-weight: 600;
+            margin-bottom: 2rem;
+            transition: transform 0.3s ease;
+        }
+        .back-to-blog:hover {
+            transform: translateX(-5px);
+        }
+        .post-footer {
+            background: #0a1425;
+            padding: 4rem 0;
+            text-align: center;
+        }
+        .share-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+        .share-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            text-decoration: none;
+            color: white;
+            transition: all 0.3s ease;
+        }
+        .share-btn.twitter { background: #1da1f2; }
+        .share-btn.facebook { background: #4267b2; }
+        .share-btn.linkedin { background: #0077b5; }
+        .share-btn.whatsapp { background: #25d366; }
+        .share-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+        }
+        
+        @media (max-width: 768px) {
+            .post-title {
+                font-size: 2rem;
+            }
+            .post-content {
+                padding: 0 1rem;
+            }
+            .post-meta {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<header class="main-header">
+    <nav class="main-nav container">
+        <div class="logo"><a href="/"><img src="../assets/logo.webp" alt="Logo Ronald Rangel"></a></div>
+        <div class="nav-menu">
+            <ul class="nav-links">
+                <li><a href="/">Inicio</a></li>
+                <li><a href="/#servicios">Servicios</a></li>
+                <li><a href="/#planes">Planes</a></li>
+                <li><a href="/#sobre-mi">Sobre Mí</a></li>
+                <li><a href="/blog">Blog</a></li>
+                <li><a href="/#contacto">Contacto</a></li>
+            </ul>
+        </div>
+    </nav>
+</header>
+
+<main>
+    <article class="post-article">
+        <header class="post-header">
+            <div class="container">
+                <a href="/blog" class="back-to-blog">
+                    <i class="fas fa-arrow-left"></i> Volver al blog
+                </a>
+                <div class="post-meta-header">
+                    <span class="post-category-badge" id="post-category">Cargando...</span>
+                    <h1 class="post-title" id="post-title-display">Cargando artículo...</h1>
+                    <div class="post-meta">
+                        <span id="post-author">Por Ronald Rangel</span>
+                        <span id="post-date">Cargando fecha...</span>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <section class="container">
+            <div class="post-featured-image" id="post-image-container" style="display: none;">
+                <img id="post-featured-img" src="" alt="">
+            </div>
+        </section>
+
+        <section class="post-content" id="post-content">
+            <p>Cargando contenido...</p>
+        </section>
+
+        <footer class="post-footer">
+            <div class="container">
+                <h3>Comparte este artículo</h3>
+                <div class="share-buttons" id="share-buttons">
+                    <a href="#" class="share-btn twitter" id="share-twitter">
+                        <i class="fab fa-twitter"></i>
+                    </a>
+                    <a href="#" class="share-btn facebook" id="share-facebook">
+                        <i class="fab fa-facebook-f"></i>
+                    </a>
+                    <a href="#" class="share-btn linkedin" id="share-linkedin">
+                        <i class="fab fa-linkedin-in"></i>
+                    </a>
+                    <a href="#" class="share-btn whatsapp" id="share-whatsapp">
+                        <i class="fab fa-whatsapp"></i>
+                    </a>
+                </div>
+                <div style="margin-top: 3rem;">
+                    <h3>¿Te gustó este artículo?</h3>
+                    <p>Hablemos sobre cómo puedo ayudarte con tu estrategia digital</p>
+                    <a href="https://wa.me/573002278962" target="_blank" class="cta-button">CONVERSEMOS</a>
+                </div>
+            </div>
+        </footer>
+    </article>
+</main>
+
+<footer class="main-footer">
+    <div class="container">
+        <div class="social-links">
+            <a href="#"><i class="fa-brands fa-linkedin-in"></i></a>
+            <a href="#"><i class="fa-brands fa-youtube"></i></a>
+            <a href="#"><i class="fa-brands fa-twitter"></i></a>
+            <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
+        </div>
+        <p class="copyright-text">© 2025 Ronald Rangel. Todos los derechos reservados.</p>
+    </div>
+</footer>
+
+<a href="https://wa.me/573002278962" target="_blank" class="floating-whatsapp">
+    <i class="fa-brands fa-whatsapp"></i><span>Hablemos</span>
+</a>
+
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+    // Obtener el slug de la URL
+    const pathSegments = window.location.pathname.split('/');
+    const slug = pathSegments[pathSegments.length - 1];
+    
+    if (!slug) {
+        window.location.href = '/blog';
+        return;
+    }
+
+    // Cargar el post
+    fetch('../posts.json')
+        .then(response => response.json())
+        .then(posts => {
+            const post = posts.find(p => p.slug === slug);
+            
+            if (!post) {
+                document.getElementById('post-content').innerHTML = 
+                    '<div style="text-align: center;"><h2>Artículo no encontrado</h2><p><a href="/blog">Volver al blog</a></p></div>';
+                return;
+            }
+
+            // Actualizar título de la página
+            document.title = `${post.titulo} | Ronald Rangel`;
+            document.getElementById('post-title').content = post.titulo;
+            document.getElementById('post-description').content = post.resumen;
+
+            // Mostrar información del post
+            document.getElementById('post-category').textContent = post.categoria;
+            document.getElementById('post-title-display').textContent = post.titulo;
+            
+            const postDate = new Date(post.fecha).toLocaleDateString('es-CO', {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric'
+            });
+            document.getElementById('post-date').textContent = postDate;
+
+            // Mostrar imagen destacada si existe
+            if (post.imagen_principal) {
+                const imageContainer = document.getElementById('post-image-container');
+                const featuredImg = document.getElementById('post-featured-img');
+                featuredImg.src = '../' + post.imagen_principal;
+                featuredImg.alt = post.titulo;
+                imageContainer.style.display = 'block';
+            }
+
+            // Convertir markdown a HTML y mostrar contenido
+            const contentHtml = marked.parse(post.contenido);
+            document.getElementById('post-content').innerHTML = contentHtml;
+
+            // Configurar botones de compartir
+            const currentUrl = window.location.href;
+            const title = encodeURIComponent(post.titulo);
+            const text = encodeURIComponent(post.resumen);
+
+            document.getElementById('share-twitter').href = 
+                `https://twitter.com/intent/tweet?text=${title}&url=${currentUrl}`;
+            document.getElementById('share-facebook').href = 
+                `https://www.facebook.com/sharer/sharer.php?u=${currentUrl}`;
+            document.getElementById('share-linkedin').href = 
+                `https://www.linkedin.com/sharing/share-offsite/?url=${currentUrl}`;
+            document.getElementById('share-whatsapp').href = 
+                `https://wa.me/?text=${title}%20${currentUrl}`;
+        })
+        .catch(error => {
+            console.error('Error cargando el post:', error);
+            document.getElementById('post-content').innerHTML = 
+                '<div style="text-align: center;"><h2>Error cargando el artículo</h2><p><a href="/blog">Volver al blog</a></p></div>';
+        });
+});
+</script>
+
+<script src="../script.js"></script>
+
+</body>
+</html>
