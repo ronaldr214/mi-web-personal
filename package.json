@@ -1,0 +1,26 @@
+{
+  "name": "ronald-rangel-website",
+  "version": "1.0.0",
+  "description": "Sitio web personal de Ronald Rangel - Estratega Digital",
+  "main": "index.html",
+  "scripts": {
+    "build": "node build-posts.js",
+    "dev": "npm run build && python -m http.server 8000",
+    "prebuild": "npm run build"
+  },
+  "keywords": [
+    "estrategia digital",
+    "desarrollo web",
+    "branding",
+    "inteligencia artificial"
+  ],
+  "author": "Ronald Rangel",
+  "license": "MIT",
+  "devDependencies": {
+    "gray-matter": "^4.0.3"
+  },
+  "repository": {
+    "type": "git",
+    "url": "tu-repositorio-github-aqui"
+  }
+}
