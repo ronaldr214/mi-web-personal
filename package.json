@@ -24,3 +24,15 @@
     "url": "tu-repositorio-github-aqui"
   }
 }
+{
+  "name": "ronald-rangel-blog",
+  "version": "1.0.0",
+  "scripts": {
+    "build": "node build-posts.js",
+    "dev": "node build-posts.js && python -m http.server 8000",
+    "prebuild": "node build-posts.js"
+  },
+  "dependencies": {
+    "gray-matter": "^4.0.3"
+  }
+}
