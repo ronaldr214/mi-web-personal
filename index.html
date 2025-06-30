@@ -67,23 +67,245 @@
 </section>
 
 <!-- Sección de Posts Destacados -->
-<section class="featured-posts">
-    <div class="container">
-        <div class="section-title">
-            <h2>Últimos Artículos del Blog</h2>
-            <p>Descubre contenido estratégico sobre marketing digital, branding, desarrollo web e inteligencia artificial para hacer crecer tu negocio.</p>
-        </div>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Posts Destacados - Ronald Rangel</title>
+    <style>
+        .featured-posts {
+            padding: 60px 0;
+            background-color: #f8f9fa;
+        }
         
-        <div class="posts-grid" id="featuredPosts">
-            <!-- Los posts se cargarán dinámicamente aquí -->
-        </div>
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
         
-        <div class="no-posts" id="noPosts" style="display: none;">
-            <h3>Próximamente</h3>
-            <p>Estoy preparando contenido increíble para ti. ¡Muy pronto tendrás acceso a artículos que te ayudarán a potenciar tu negocio!</p>
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+        
+        .section-title h2 {
+            font-size: 2.5rem;
+            color: #2c3e50;
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+        
+        .section-title p {
+            font-size: 1.2rem;
+            color: #6c757d;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .posts-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+        
+        .post-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .post-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+        }
+        
+        .post-image {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+        
+        .post-card:hover .post-image {
+            transform: scale(1.05);
+        }
+        
+        .post-content {
+            padding: 25px;
+        }
+        
+        .post-category {
+            display: inline-block;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            margin-bottom: 15px;
+        }
+        
+        .post-title {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: #2c3e50;
+            margin-bottom: 15px;
+            line-height: 1.4;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+        
+        .post-excerpt {
+            color: #6c757d;
+            line-height: 1.6;
+            margin-bottom: 20px;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+        
+        .post-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            font-size: 0.9rem;
+            color: #95a5a6;
+        }
+        
+        .read-more {
+            display: inline-flex;
+            align-items: center;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-decoration: none;
+            padding: 12px 25px;
+            border-radius: 25px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+        }
+        
+        .read-more:hover {
+            transform: translateX(5px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+        
+        .read-more::after {
+            content: "→";
+            margin-left: 8px;
+            transition: margin-left 0.3s ease;
+        }
+        
+        .read-more:hover::after {
+            margin-left: 12px;
+        }
+        
+        .no-posts {
+            text-align: center;
+            padding: 60px 20px;
+            color: #6c757d;
+        }
+        
+        .no-posts h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+        }
+        
+        @media (max-width: 768px) {
+            .posts-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            .section-title h2 {
+                font-size: 2rem;
+            }
+            
+            .post-content {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Sección de Posts Destacados -->
+    <section class="featured-posts">
+        <div class="container">
+            <div class="section-title">
+                <h2>Últimos Artículos del Blog</h2>
+                <p>Descubre contenido estratégico sobre marketing digital, branding, desarrollo web e inteligencia artificial para hacer crecer tu negocio.</p>
+            </div>
+            
+            <div class="posts-grid" id="featuredPosts">
+                <!-- Los posts se cargarán dinámicamente aquí -->
+            </div>
+            
+            <div class="no-posts" id="noPosts" style="display: none;">
+                <h3>Próximamente</h3>
+                <p>Estoy preparando contenido increíble para ti. ¡Muy pronto tendrás acceso a artículos que te ayudarán a potenciar tu negocio!</p>
+            </div>
         </div>
-    </div>
-</section>
+    </section>
+
+    <script>
+        // Función para cargar posts destacados
+        async function loadFeaturedPosts() {
+            try {
+                const response = await fetch('/posts.json');
+                const posts = await response.json();
+                
+                if (!posts || posts.length === 0) {
+                    document.getElementById('noPosts').style.display = 'block';
+                    return;
+                }
+                
+                // Tomar los 3 posts más recientes
+                const featuredPosts = posts.slice(0, 3);
+                const postsContainer = document.getElementById('featuredPosts');
+                
+                postsContainer.innerHTML = featuredPosts.map(post => `
+                    <article class="post-card" onclick="window.location.href='${post.slug || `/blog/${post.title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)+/g, '')}`}'">
+                        <img src="${post.featured_image || post.image || '/assets/default-blog-image.webp'}" 
+                             alt="${post.title}" 
+                             class="post-image"
+                             onerror="this.src='/assets/default-blog-image.webp'">
+                        <div class="post-content">
+                            ${post.category ? `<span class="post-category">${post.category}</span>` : ''}
+                            <h3 class="post-title">${post.title}</h3>
+                            <p class="post-excerpt">${post.excerpt || post.description || (post.body ? post.body.substring(0, 150) + '...' : 'Lee este interesante artículo...')}</p>
+                            <div class="post-meta">
+                                <span>Por Ronald Rangel</span>
+                                <span>${post.date ? new Date(post.date).toLocaleDateString('es-ES', { year: 'numeric', month: 'long', day: 'numeric' }) : ''}</span>
+                            </div>
+                            <a href="${post.slug || `/blog/${post.title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)+/g, '')}`}" class="read-more">
+                                Leer más
+                            </a>
+                        </div>
+                    </article>
+                `).join('');
+                
+            } catch (error) {
+                console.error('Error loading posts:', error);
+                document.getElementById('noPosts').style.display = 'block';
+            }
+        }
+        
+        // Cargar posts cuando se carga la página
+        document.addEventListener('DOMContentLoaded', loadFeaturedPosts);
+    </script>
+</body>
+</html>
 
 <script>
 // Código JavaScript para cargar posts destacados (del primer artefacto)
