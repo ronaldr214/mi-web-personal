@@ -74,11 +74,90 @@
                     <div class="plan-card"><h3>Ecosistema Digital Pro</h3><p class="plan-description">Pensado para emprendedores listos para escalar: construimos una marca fuerte, una web que vende y procesos automatizados.</p><div class="plan-price"><span class="offer-price">$1.699.999 <span class="currency">COP</span></span></div><ul class="plan-features"><li><i class="fas fa-check-circle"></i> Desarrollo completo de sitio web personalizado (hasta 5 secciones)</li><li><i class="fas fa-check-circle"></i> Consultoría estratégica + asesoría mensual (2 sesiones)</li><li><i class="fas fa-check-circle"></i> Integración con WhatsApp, formularios y CRM básico</li><li><i class="fas fa-check-circle"></i> Diseño de branding completo (logo, paleta, tono, estilo visual)</li><li><i class="fas fa-check-circle"></i> Automatización básica con herramientas de IA y marketing</li></ul><div class="plan-cta"><a href="https://mpago.li/1Yota2t" target="_blank" class="cta-button plan-main-cta">ADQUIRIR PLAN</a><a href="https://wa.me/573002278962?text=Hola%20Ronald,%20estoy%20interesado%20en%20el%20Plan%20Ecosistema%20Digital%20Pro%20y%20tengo%20una%20pregunta." target="_blank" class="plan-secondary-cta">Tengo una pregunta</a></div></div>
                 </div>
             </div>
-        </section>
-        <section id="featured-posts" class="section-blog">
-          <h2>Desde mi blog</h2>
-          <div class="blog-grid"></div>
-        </section>
+      <div id="blog-section" class="blog-container">
+  <!-- Aquí se inyectarán los posts destacados dinámicamente -->
+</div>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const blogContainer = document.getElementById("blog-section");
+
+  fetch("posts.json")
+    .then(response => response.json())
+    .then(posts => {
+      const destacados = posts.filter(post => post.destacado);
+      destacados.forEach(post => {
+        const card = document.createElement("div");
+        card.className = "blog-card";
+        card.innerHTML = `
+          <div class="blog-image" style="background-image: url('${post.imagen_principal}');"></div>
+          <div class="blog-content">
+            <span class="blog-category">${post.categoria}</span>
+            <h3 class="blog-title">${post.titulo}</h3>
+            <a href="/blog/${post.slug}" class="blog-link">Leer más →</a>
+          </div>
+        `;
+        blogContainer.appendChild(card);
+        gsap.from(card, { opacity: 0, y: 50, duration: 0.5, ease: "power2.out" });
+      });
+    })
+    .catch(error => console.error("Error cargando los posts:", error));
+});
+</script>
+
+<style>
+.blog-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+  justify-content: center;
+  padding: 2rem 1rem;
+}
+
+.blog-card {
+  background: #0e1e2e;
+  border-radius: 1rem;
+  overflow: hidden;
+  width: 320px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.25);
+  transition: transform 0.3s ease;
+}
+
+.blog-card:hover {
+  transform: translateY(-5px);
+}
+
+.blog-image {
+  height: 180px;
+  background-size: cover;
+  background-position: center;
+}
+
+.blog-content {
+  padding: 1rem;
+}
+
+.blog-category {
+  font-size: 0.9rem;
+  color: #00ffff;
+}
+
+.blog-title {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: white;
+  margin: 0.5rem 0;
+}
+
+.blog-link {
+  display: inline-block;
+  margin-top: 0.5rem;
+  color: #00ffff;
+  font-weight: bold;
+  text-decoration: none;
+}
+</style>
+
 
         
         <section id="sobre-mi" class="about-section">
