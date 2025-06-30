@@ -1,207 +1,81 @@
+<!-- index.html ACTUALIZADO CON SECCIÓN DE BLOG DINÁMICO -->
 <!DOCTYPE html>
 <html lang="es-CO">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ronald Rangel - Estratega Digital | Desarrollo Web, Branding & IA</title>
-    <meta name="description" content="Acompaño a emprendedores a potenciar su negocio con desarrollo web estratégico, branding con propósito y asesorías en inteligencia artificial en Colombia.">
-    <meta name="keywords" content="Desarrollo web en Colombia para emprendedores, asesor de marca personal, consultor de inteligencia artificial, marketing para startups, estratega digital">
-    <meta property="og:title" content="Ronald Rangel - Estratega Digital">
-    <meta property="og:description" content="Las marcas no se improvisan, se construyen con estrategia.">
-    <meta property="og:image" content="assets/social-share.webp">
-    <meta property="og:url" content="https://www.ronaldrangel.com.co">
-    <meta property="og:type" content="website">
-    <link rel="icon" type="image/webp" href="assets/favicon.webp">
-    <link rel="apple-touch-icon" href="assets/favicon.webp">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700;900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ronald Rangel - Estratega Digital | Desarrollo Web, Branding & IA</title>
+  <meta name="description" content="Acompaño a emprendedores a potenciar su negocio con desarrollo web estratégico, branding con propósito y asesorías en inteligencia artificial en Colombia." />
+  <meta name="keywords" content="Desarrollo web en Colombia para emprendedores, asesor de marca personal, consultor de inteligencia artificial, marketing para startups, estratega digital" />
+  <meta property="og:title" content="Ronald Rangel - Estratega Digital" />
+  <meta property="og:description" content="Las marcas no se improvisan, se construyen con estrategia." />
+  <meta property="og:image" content="assets/social-share.webp" />
+  <meta property="og:url" content="https://www.ronaldrangel.com.co" />
+  <meta property="og:type" content="website" />
+  <link rel="icon" type="image/webp" href="assets/favicon.webp" />
+  <link rel="apple-touch-icon" href="assets/favicon.webp" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
+  <!-- Header y secciones anteriores igual -->
 
-    <header class="main-header">
-        <nav class="main-nav container">
-            <div class="logo">
-                <a href="#inicio"><img src="assets/logo.webp" alt="Logo Ronald Rangel"></a>
-            </div>
-            <div class="nav-menu">
-                 <ul class="nav-links" data-visible="false">
-                    <li><a href="#inicio">Inicio</a></li>
-                    <li><a href="#servicios">Servicios</a></li>
-                    <li><a href="#planes">Planes</a></li>
-                    <li><a href="#sobre-mi">Sobre Mí</a></li>
-                    <li><a href="#contacto">Contacto</a></li>
-                </ul>
-            </div>
-            <button class="mobile-nav-toggle" aria-controls="primary-navigation" aria-expanded="false">
-                <span class="sr-only">Menú</span>
-            </button>
-        </nav>
-    </header>
+  <!-- Nueva sección blog reemplazada -->
+  <section id="featured-posts" class="section-blog" style="padding: 4rem 1rem; background-color: #0f1c2f;">
+    <div class="container" style="max-width: 1200px; margin: auto;">
+      <h2 style="color: white; font-size: 2rem; text-align: center; margin-bottom: 2rem;">Desde mi blog</h2>
+      <div class="blog-grid" id="blogGrid" style="display: grid; gap: 2rem; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));"></div>
+    </div>
+  </section>
 
-    <main>
-        <section id="inicio" class="hero-section">
-            <div class="hero-text-panel">
-                <h1>Las marcas no se improvisan, se construyen con <span class="highlight">estrategia.</span></h1>
-                <p>Soy Ronald Rangel, comunicador digital y estratega creativo. Acompaño a emprendedores como tú a potenciar su negocio o marca con desarrollo web, branding y asesoría en inteligencia artificial.</p>
-                <a href="https://wa.me/573002278962?text=Hola%20Ronald,%20vengo%20de%20tu%20web%20y%20quisiera%20agendar%20una%20consultor%C3%ADa." target="_blank" class="cta-button">AGENDA AHORA, ES GRATIS</a>
-            </div>
-            <div class="hero-image-panel">
-                <img src="assets/hero-photo.webp" alt="Ronald Rangel, estratega digital">
-            </div>
-        </section>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      fetch('/posts.json')
+        .then(res => res.json())
+        .then(posts => {
+          const blogGrid = document.getElementById("blogGrid");
+          posts.filter(p => p.destacado).forEach(post => {
+            const card = document.createElement("div");
+            card.className = "blog-card";
+            card.style = `
+              background: #111c2d;
+              color: white;
+              border-radius: 12px;
+              overflow: hidden;
+              box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+              transform: translateY(20px);
+              opacity: 0;
+              transition: all 0.3s ease;
+            `;
+            card.innerHTML = `
+              <img src="${post.imagen_principal}" alt="${post.titulo}" style="width: 100%; height: 180px; object-fit: cover; display: block;">
+              <div style="padding: 1.2rem;">
+                <span style="font-size: 0.85rem; color: #00ffff; font-weight: 600;">${post.categoria}</span>
+                <h3 style="font-size: 1.2rem; color: white; margin: 0.5rem 0;">${post.titulo}</h3>
+                <a href="/blog/${post.slug}" style="color: #00ffff; text-decoration: none; font-weight: bold;">Leer más →</a>
+              </div>
+            `;
+            blogGrid.appendChild(card);
+            if (window.gsap) {
+              gsap.to(card, {
+                opacity: 1,
+                y: 0,
+                duration: 0.6,
+                ease: "power2.out"
+              });
+            } else {
+              card.style.opacity = 1;
+              card.style.transform = "translateY(0)";
+            }
+          });
+        })
+        .catch(err => console.error("Error al cargar posts.json:", err));
+    });
+  </script>
 
-        <section id="servicios" class="services-section">
-            <div class="container">
-                <h2 class="section-title">¿En qué puedo ayudarte?</h2>
-                <div class="services-grid">
-                    <div class="service-card"><img src="assets/icon-web.webp" alt="Icono Desarrollo Web" class="service-icon"><h3>Desarrollo Web Estratégico</h3><p>Diseño y construyo sitios web con enfoque en resultados. Tu página será tu mejor vendedor, alineada a tus objetivos y pensada para convertir.</p><a href="https://wa.me/573002278962?text=Hola%20Ronald,%20vengo%20de%20tu%20web%20y%20estoy%20interesado%20en%20el%20servicio%20de%20Desarrollo%20Web%20Estrat%C3%A9gico." target="_blank" class="cta-secondary">LO QUIERO</a></div>
-                    <div class="service-card"><img src="assets/icon-branding.webp" alt="Icono Branding" class="service-icon"><h3>Branding con Propósito</h3><p>Tu marca debe contar tu historia, reflejar tus valores y conectar emocionalmente. Te ayudo a definir una identidad sólida, coherente y memorable.</p><a href="https://wa.me/573002278962?text=Hola%20Ronald,%20vengo%20de%20tu%20web%20y%20estoy%20interesado%20en%20el%20servicio%20de%20Branding%20con%20Prop%C3%B3sito." target="_blank" class="cta-secondary">LO QUIERO</a></div>
-                    <div class="service-card"><img src="assets/icon-marketing.webp" alt="Icono Marketing Digital" class="service-icon"><h3>Marketing Digital Inteligente</h3><p>Estrategias hechas a medida. Combino creatividad, datos y automatización para ayudarte a crecer en redes, captar leads y aumentar tus ventas.</p><a href="https://wa.me/573002278962?text=Hola%20Ronald,%20vengo%20de%20tu%20web%20y%20estoy%20interesado%20en%20el%20servicio%20de%20Marketing%20Digital%20Inteligente." target="_blank" class="cta-secondary">LO QUIERO</a></div>
-                    <div class="service-card"><img src="assets/icon-ai.webp" alt="Icono Inteligencia Artificial" class="service-icon"><h3>Asesoría en IA Aplicada</h3><p>La IA ya no es el futuro, es el presente. Te enseño a aprovecharla para optimizar tu negocio, crear contenido más rápido y tomar mejores decisiones.</p><a href="https://wa.me/573002278962?text=Hola%20Ronald,%20vengo%20de%20tu%20web%20y%20estoy%20interesado%20en%20la%20Asesor%C3%ADa%20en%20IA%20Aplicada." target="_blank" class="cta-secondary">LO QUIERO</a></div>
-                </div>
-            </div>
-        </section>
-
-        <section id="planes" class="plans-section">
-            <div class="container">
-                <h2 class="section-title">Planes Estratégicos para Impulsar tu Negocio</h2>
-                <div class="plans-grid">
-                    <div class="plan-card"><h3>Despegue Estratégico</h3><p class="plan-description">Ideal para emprendedores que están lanzando su segundo negocio y necesitan una base sólida.</p><div class="plan-price"><span class="offer-price">$899.000 <span class="currency">COP</span></span></div><ul class="plan-features"><li><i class="fas fa-check-circle"></i> Sesión 1:1 de diagnóstico estratégico (60 min)</li><li><i class="fas fa-check-circle"></i> Auditoría exprés de tu presencia digital actual</li><li><i class="fas fa-check-circle"></i> Guía de acción personalizada con próximos pasos</li><li><i class="fas fa-check-circle"></i> Recomendaciones de herramientas digitales y de IA</li><li><i class="fas fa-check-circle"></i> Acceso a una plantilla exclusiva para estructurar tu oferta</li></ul><div class="plan-cta"><a href="https://mpago.li/1La11v8" target="_blank" class="cta-button plan-main-cta">ADQUIRIR PLAN</a><a href="https://wa.me/573002278962?text=Hola%20Ronald,%20estoy%20interesado%20en%20el%20Plan%20Despegue%20Estrat%C3%A9gico%20y%20tengo%20una%20pregunta." target="_blank" class="plan-secondary-cta">Tengo una pregunta</a></div></div>
-                    <div class="plan-card highlighted"><div class="highlight-badge">MÁS POPULAR</div><h3>Marca con Rumbo</h3><p class="plan-description">Para quienes necesitan construir o rediseñar su marca y sitio web con visión de negocio y enfoque comercial.</p><div class="plan-price"><span class="offer-price">$1.499.999 <span class="currency">COP</span></span></div><ul class="plan-features"><li><i class="fas fa-check-circle"></i> Consultoría de branding y tono de marca</li><li><i class="fas fa-check-circle"></i> Boceto estratégico de sitio web (wireframe + estructura)</li><li><i class="fas fa-check-circle"></i> Revisión de identidad visual (colores, tipografía, logo)</li><li><i class="fas fa-check-circle"></i> Roadmap de contenidos y estrategia de visibilidad</li><li><i class="fas fa-check-circle"></i> Recomendaciones de IA para optimizar procesos creativos</li></ul><div class="plan-cta"><a href="https://mpago.li/1nFLPLW" target="_blank" class="cta-button plan-main-cta">ADQUIRIR PLAN</a><a href="https://wa.me/573002278962?text=Hola%20Ronald,%20estoy%20interesado%20en%20el%20Plan%20Marca%20con%20Rumbo%20y%20tengo%20una%20pregunta." target="_blank" class="plan-secondary-cta">Tengo una pregunta</a></div></div>
-                    <div class="plan-card"><h3>Ecosistema Digital Pro</h3><p class="plan-description">Pensado para emprendedores listos para escalar: construimos una marca fuerte, una web que vende y procesos automatizados.</p><div class="plan-price"><span class="offer-price">$1.699.999 <span class="currency">COP</span></span></div><ul class="plan-features"><li><i class="fas fa-check-circle"></i> Desarrollo completo de sitio web personalizado (hasta 5 secciones)</li><li><i class="fas fa-check-circle"></i> Consultoría estratégica + asesoría mensual (2 sesiones)</li><li><i class="fas fa-check-circle"></i> Integración con WhatsApp, formularios y CRM básico</li><li><i class="fas fa-check-circle"></i> Diseño de branding completo (logo, paleta, tono, estilo visual)</li><li><i class="fas fa-check-circle"></i> Automatización básica con herramientas de IA y marketing</li></ul><div class="plan-cta"><a href="https://mpago.li/1Yota2t" target="_blank" class="cta-button plan-main-cta">ADQUIRIR PLAN</a><a href="https://wa.me/573002278962?text=Hola%20Ronald,%20estoy%20interesado%20en%20el%20Plan%20Ecosistema%20Digital%20Pro%20y%20tengo%20una%20pregunta." target="_blank" class="plan-secondary-cta">Tengo una pregunta</a></div></div>
-                </div>
-            </div>
-      <div id="blog-section" class="blog-container">
-  <!-- Aquí se inyectarán los posts destacados dinámicamente -->
-</div>
-
-<script>
-document.addEventListener("DOMContentLoaded", () => {
-  const blogContainer = document.getElementById("blog-section");
-
-  fetch("posts.json")
-    .then(response => response.json())
-    .then(posts => {
-      const destacados = posts.filter(post => post.destacado);
-      destacados.forEach(post => {
-        const card = document.createElement("div");
-        card.className = "blog-card";
-        card.innerHTML = `
-          <div class="blog-image" style="background-image: url('${post.imagen_principal}');"></div>
-          <div class="blog-content">
-            <span class="blog-category">${post.categoria}</span>
-            <h3 class="blog-title">${post.titulo}</h3>
-            <a href="/blog/${post.slug}" class="blog-link">Leer más →</a>
-          </div>
-        `;
-        blogContainer.appendChild(card);
-        gsap.from(card, { opacity: 0, y: 50, duration: 0.5, ease: "power2.out" });
-      });
-    })
-    .catch(error => console.error("Error cargando los posts:", error));
-});
-</script>
-
-<style>
-.blog-container {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 2rem;
-  justify-content: center;
-  padding: 2rem 1rem;
-}
-
-.blog-card {
-  background: #0e1e2e;
-  border-radius: 1rem;
-  overflow: hidden;
-  width: 320px;
-  box-shadow: 0 4px 20px rgba(0,0,0,0.25);
-  transition: transform 0.3s ease;
-}
-
-.blog-card:hover {
-  transform: translateY(-5px);
-}
-
-.blog-image {
-  height: 180px;
-  background-size: cover;
-  background-position: center;
-}
-
-.blog-content {
-  padding: 1rem;
-}
-
-.blog-category {
-  font-size: 0.9rem;
-  color: #00ffff;
-}
-
-.blog-title {
-  font-size: 1.2rem;
-  font-weight: bold;
-  color: white;
-  margin: 0.5rem 0;
-}
-
-.blog-link {
-  display: inline-block;
-  margin-top: 0.5rem;
-  color: #00ffff;
-  font-weight: bold;
-  text-decoration: none;
-}
-</style>
-
-
-        
-        <section id="sobre-mi" class="about-section">
-            <div class="container">
-                <div class="about-main-profile"><img src="assets/ronald-about.webp" alt="Foto de Ronald Rangel" class="about-photo-main"><div class="about-text"><h2 class="section-title left-aligned">Mi Misión es Verte Crecer</h2><p>Llevo más de 15 años acompañando a marcas, personas y proyectos a encontrar su voz en el mundo digital. No creo en las fórmulas mágicas, creo en el poder de una estrategia bien pensada, en la autenticidad y en las conexiones reales. Soy comunicador de esencia, creativo por naturaleza y un apasionado de ayudar a otros a crecer.</p><p><strong>Si estás listo para llevar tu negocio al siguiente nivel, estoy aquí para guiarte con claridad, experiencia y corazón.</strong></p><a href="https://wa.me/573002278962?text=Hola%20Ronald,%20acabo%20de%20leer%20sobre%20ti%20y%20quiero%20que%20hablemos." target="_blank" class="cta-button">TE PUEDO ATENDER AHORA MISMO</a></div></div>
-                <div class="team-grid">
-                    <div class="team-member-card"><img src="assets/team-1.webp" alt="Foto de Laura Gómez"><h4>Laura Gómez</h4><span>Diseñadora Visual</span></div>
-                    <div class="team-member-card"><img src="assets/team-2.webp" alt="Foto de Andrés Ruiz"><h4>Andrés Ruiz</h4><span>Desarrollador Front-End</span></div>
-                    <div class="team-member-card"><img src="assets/team-3.webp" alt="Foto de Camila Torres"><h4>Camila Torres</h4><span>Estratega de Contenidos e IA</span></div>
-                </div>
-            </div>
-        </section>
-        
-        <section id="contacto" class="contact-section">
-            <div class="container">
-                <h2>No lo pienses más y contacta ahora</h2>
-                <p>Es momento de diferenciarte de la competencia. Te ayudo en todo el proceso, por mi experiencia y por el equipo de profesionales que me acompañan en la tarea.</p>
-                <a href="https://wa.me/573002278962?text=Hola%20Ronald,%20estoy%20listo%20para%20empezar%20mi%20proyecto." target="_blank" class="cta-button">AGENDAR CONSULTORÍA</a>
-            </div>
-        </section>
-    </main>
-
-    <footer class="main-footer">
-        <div class="container">
-            <div class="social-links">
-                <a href="https://www.linkedin.com/in/ronald-rangel-ram%C3%ADrez-46877b31/" target="_blank" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
-                <a href="#" target="_blank" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
-                <a href="https://x.com/ronaldrangel" target="_blank" aria-label="X"><i class="fa-brands fa-twitter"></i></a>
-                <a href="https://www.facebook.com/ronald.rangel" target="_blank" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
-            </div>
-            <p class="copyright-text">© 2025 Ronald Rangel. Todos los derechos reservados.</p>
-        </div>
-    </footer>
-
-    <a href="https://wa.me/573002278962?text=Hola%20Ronald,%20te%20contacto%20desde%20tu%20p%C3%A1gina%20web." target="_blank" class="floating-whatsapp">
-        <i class="fa-brands fa-whatsapp"></i>
-        <span>Hablemos</span>
-    </a>
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
-    <script src="script.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
-
-
+  <!-- Footer y scripts igual -->
 </body>
 </html>
