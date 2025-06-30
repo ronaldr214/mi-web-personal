@@ -1,311 +1,210 @@
-// build-posts.js - Script para generar posts.json desde archivos markdown
-const fs = require('fs');
-const path = require('path');
-const matter = require('gray-matter');
+// Configuración - Cambia esta URL por tu dominio de WordPress
+const WORDPRESS_API_URL = 'https://tudominio.com/wp-json/wp/v2';
 
-const postsDirectory = path.join(process.cwd(), '_posts');
-const outputFile = path.join(process.cwd(), 'posts.json');
+class WordPressBlog {
+    constructor() {
+        this.currentPage = 1;
+        this.postsPerPage = 9;
+        this.totalPages = 1;
+        this.loading = false;
+    }
 
-function getAllPosts() {
-    const posts = [];
-    
-    try {
-        // Verificar si la carpeta _posts existe
-        if (!fs.existsSync(postsDirectory)) {
-            console.log('Carpeta _posts no encontrada, creando posts.json vacío');
-            fs.writeFileSync(outputFile, JSON.stringify([]));
-            return;
-        }
+    async init() {
+        await this.loadPosts();
+        this.setupEventListeners();
+    }
+
+    async loadPosts(page = 1) {
+        if (this.loading) return;
         
-        const files = fs.readdirSync(postsDirectory);
-        
-        files.forEach(filename => {
-            if (filename.endsWith('.md')) {
-                const filePath = path.join(postsDirectory, filename);
-                const fileContents = fs.readFileSync(filePath, 'utf8');
-                const { data, content } = matter(fileContents);
-                
-                // Crear slug del nombre del archivo
-                const slug = `/blog/${filename.replace('.md', '')}`;
-                
-                posts.push({
-                    title: data.title || 'Sin título',
-                    slug: slug,
-                    date: data.date || new Date().toISOString(),
-                    featured_image: data.featured_image || data.image || '',
-                    excerpt: data.excerpt || data.description || '',
-                    category: data.category || 'General',
-                    author: data.author || 'Ronald Rangel',
-                    body: content,
-                    filename: filename
-                });
+        this.loading = true;
+        this.showLoading();
+
+        try {
+            const response = await fetch(
+                `${WORDPRESS_API_URL}/posts?per_page=${this.postsPerPage}&page=${page}&_embed`
+            );
+
+            if (!response.ok) {
+                throw new Error(`Error: ${response.status}`);
             }
+
+            const posts = await response.json();
+            
+            // Obtener total de páginas del header
+            this.totalPages = parseInt(response.headers.get('X-WP-TotalPages')) || 1;
+            this.currentPage = page;
+
+            this.renderPosts(posts);
+            this.renderPagination();
+            
+        } catch (error) {
+            console.error('Error cargando posts:', error);
+            this.showError('Error cargando los artículos. Por favor intenta más tarde.');
+        } finally {
+            this.loading = false;
+        }
+    }
+
+    renderPosts(posts) {
+        const container = document.getElementById('blog-posts');
+        
+        if (posts.length === 0) {
+            container.innerHTML = '<p class="no-posts">No hay artículos disponibles.</p>';
+            return;
+        }
+
+        const postsHTML = posts.map(post => this.createPostCard(post)).join('');
+        container.innerHTML = postsHTML;
+    }
+
+    createPostCard(post) {
+        // Obtener imagen destacada
+        const featuredImage = post._embedded?.['wp:featuredmedia']?.[0]?.source_url || 
+                             'https://via.placeholder.com/400x200?text=Sin+Imagen';
+        
+        // Obtener categorías
+        const categories = post._embedded?.['wp:term']?.[0] || [];
+        const categoryName = categories.length > 0 ? categories[0].name : 'General';
+        
+        // Formatear fecha
+        const date = new Date(post.date).toLocaleDateString('es-ES', {
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric'
         });
-        
-        // Ordenar posts por fecha (más recientes primero)
-        posts.sort((a, b) => new Date(b.date) - new Date(a.date));
-        
-        // Escribir archivo JSON
-        fs.writeFileSync(outputFile, JSON.stringify(posts, null, 2));
-        console.log(`✅ Generados ${posts.length} posts en posts.json`);
-        
-    } catch (error) {
-        console.error('Error al procesar posts:', error);
-        // Crear archivo vacío en caso de error
-        fs.writeFileSync(outputFile, JSON.stringify([]));
-    }
-}
 
-// Ejecutar si se llama directamente
-if (require.main === module) {
-    getAllPosts();
-}
+        // Limpiar excerpt
+        const excerpt = this.stripHtml(post.excerpt.rendered).substring(0, 150) + '...';
 
-module.exports = { getAllPosts };
-
-// ==========================================
-// admin/config.yml - Configuración de Netlify CMS
-// ==========================================
-
-/*
-backend:
-  name: git-gateway
-  branch: main
-
-media_folder: "assets"
-public_folder: "/assets"
-
-collections:
-  - name: "posts"
-    label: "Posts del Blog"
-    folder: "_posts"
-    create: true
-    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
-    fields:
-      - { label: "Título", name: "title", widget: "string" }
-      - { label: "Fecha", name: "date", widget: "datetime" }
-      - { label: "Imagen Destacada", name: "featured_image", widget: "image" }
-      - { label: "Categoría", name: "category", widget: "select", options: ["Marketing Digital", "Branding", "Desarrollo Web", "Inteligencia Artificial", "Estrategia", "General"] }
-      - { label: "Extracto", name: "excerpt", widget: "text" }
-      - { label: "Contenido", name: "body", widget: "markdown" }
-      - { label: "Destacado", name: "featured", widget: "boolean", default: false }
-*/
-
-// ==========================================
-// blog.html - Página principal del blog
-// ==========================================
-
-/*
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Blog - Ronald Rangel | Estratega Digital</title>
-    <meta name="description" content="Artículos sobre marketing digital, branding, desarrollo web e inteligencia artificial para hacer crecer tu negocio.">
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
-    <header class="header">
-        <nav class="navbar">
-            <div class="container">
-                <a href="/" class="logo">Ronald Rangel</a>
-                <ul class="nav-menu">
-                    <li><a href="/">Inicio</a></li>
-                    <li><a href="/blog" class="active">Blog</a></li>
-                    <li><a href="/#servicios">Servicios</a></li>
-                    <li><a href="/#contacto">Contacto</a></li>
-                </ul>
-            </div>
-        </nav>
-    </header>
-
-    <main class="blog-page">
-        <section class="blog-hero">
-            <div class="container">
-                <h1>Blog de Estrategia Digital</h1>
-                <p>Contenido estratégico para hacer crecer tu negocio en el mundo digital</p>
-            </div>
-        </section>
-
-        <section class="blog-content">
-            <div class="container">
-                <div class="blog-grid" id="blogGrid">
-                    <!-- Los posts se cargarán aquí -->
-                </div>
-                
-                <div class="no-posts" id="noPosts" style="display: none;">
-                    <h3>Próximamente</h3>
-                    <p>Estoy preparando contenido increíble para ti. ¡Muy pronto tendrás acceso a artículos que te ayudarán a potenciar tu negocio!</p>
-                </div>
-            </div>
-        </section>
-    </main>
-
-    <script src="blog.js"></script>
-</body>
-</html>
-*/
-
-// ==========================================
-// blog.js - JavaScript para el blog
-// ==========================================
-
-// Función para cargar todos los posts
-async function loadBlogPosts() {
-    try {
-        const response = await fetch('/posts.json');
-        const posts = await response.json();
-        
-        if (!posts || posts.length === 0) {
-            document.getElementById('noPosts').style.display = 'block';
-            return;
-        }
-        
-        const blogGrid = document.getElementById('blogGrid');
-        
-        blogGrid.innerHTML = posts.map(post => `
-            <article class="blog-card">
-                <div class="blog-image">
-                    <img src="${post.featured_image || '/assets/default-blog-image.webp'}" 
-                         alt="${post.title}"
-                         onerror="this.src='/assets/default-blog-image.webp'">
-                    ${post.category ? `<span class="blog-category">${post.category}</span>` : ''}
-                </div>
-                <div class="blog-content">
-                    <div class="blog-meta">
-                        <span class="blog-date">${new Date(post.date).toLocaleDateString('es-ES', { year: 'numeric', month: 'long', day: 'numeric' })}</span>
-                        <span class="blog-author">Por ${post.author}</span>
-                    </div>
-                    <h2 class="blog-title">
-                        <a href="${post.slug}">${post.title}</a>
-                    </h2>
-                    <p class="blog-excerpt">${post.excerpt || (post.body ? post.body.substring(0, 150) + '...' : '')}</p>
-                    <a href="${post.slug}" class="read-more-btn">Leer artículo completo</a>
-                </div>
-            </article>
-        `).join('');
-        
-    } catch (error) {
-        console.error('Error loading blog posts:', error);
-        document.getElementById('noPosts').style.display = 'block';
-    }
-}
-
-// Función para cargar un post individual
-async function loadSinglePost() {
-    const path = window.location.pathname;
-    const postId = path.split('/').pop();
-    
-    try {
-        const response = await fetch('/posts.json');
-        const posts = await response.json();
-        
-        const post = posts.find(p => p.slug === path || p.filename.replace('.md', '') === postId);
-        
-        if (!post) {
-            document.body.innerHTML = '<h1>Artículo no encontrado</h1><p><a href="/blog">Volver al blog</a></p>';
-            return;
-        }
-        
-        // Renderizar el post completo
-        document.title = `${post.title} - Ronald Rangel`;
-        
-        const postHtml = `
-            <article class="single-post">
-                <header class="post-header">
-                    <div class="container">
-                        <nav class="breadcrumb">
-                            <a href="/">Inicio</a> > <a href="/blog">Blog</a> > ${post.title}
-                        </nav>
-                        ${post.category ? `<span class="post-category">${post.category}</span>` : ''}
-                        <h1 class="post-title">${post.title}</h1>
-                        <div class="post-meta">
-                            <span>Por ${post.author}</span>
-                            <span>${new Date(post.date).toLocaleDateString('es-ES', { year: 'numeric', month: 'long', day: 'numeric' })}</span>
-                        </div>
-                    </div>
-                </header>
-                
-                ${post.featured_image ? `
-                <div class="post-featured-image">
-                    <img src="${post.featured_image}" alt="${post.title}">
-                </div>
-                ` : ''}
-                
+        return `
+            <article class="post-card">
+                <img src="${featuredImage}" alt="${post.title.rendered}" class="post-image" onerror="this.src='https://via.placeholder.com/400x200?text=Sin+Imagen'">
                 <div class="post-content">
-                    <div class="container">
-                        <div class="post-body">
-                            ${markdownToHtml(post.body)}
-                        </div>
-                        
-                        <div class="post-footer">
-                            <div class="post-share">
-                                <h4>Comparte este artículo</h4>
-                                <div class="share-buttons">
-                                    <a href="https://wa.me/?text=${encodeURIComponent(post.title + ' - ' + window.location.href)}" class="share-btn whatsapp">WhatsApp</a>
-                                    <a href="https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(window.location.href)}" class="share-btn linkedin">LinkedIn</a>
-                                    <a href="https://twitter.com/intent/tweet?text=${encodeURIComponent(post.title)}&url=${encodeURIComponent(window.location.href)}" class="share-btn twitter">Twitter</a>
-                                </div>
-                            </div>
-                            
-                            <div class="back-to-blog">
-                                <a href="/blog" class="btn-secondary">← Volver al blog</a>
-                            </div>
-                        </div>
+                    <span class="post-category">${categoryName}</span>
+                    <h2 class="post-title">${post.title.rendered}</h2>
+                    <div class="post-meta">
+                        <span>📅 ${date}</span>
+                        <span>👤 Ronald Rangel</span>
                     </div>
+                    <p class="post-excerpt">${excerpt}</p>
+                    <a href="${post.link}" target="_blank" class="read-more">Leer más</a>
                 </div>
             </article>
         `;
+    }
+
+    renderPagination() {
+        const container = document.getElementById('pagination');
         
-        document.body.innerHTML = postHtml;
+        if (this.totalPages <= 1) {
+            container.innerHTML = '';
+            return;
+        }
+
+        let paginationHTML = '';
         
-    } catch (error) {
-        console.error('Error loading post:', error);
-        document.body.innerHTML = '<h1>Error cargando el artículo</h1><p><a href="/blog">Volver al blog</a></p>';
+        // Botón anterior
+        if (this.currentPage > 1) {
+            paginationHTML += `<button onclick="blog.loadPosts(${this.currentPage - 1})">← Anterior</button>`;
+        }
+
+        // Números de página
+        for (let i = 1; i <= this.totalPages; i++) {
+            if (i === this.currentPage) {
+                paginationHTML += `<button class="active">${i}</button>`;
+            } else if (i === 1 || i === this.totalPages || (i >= this.currentPage - 2 && i <= this.currentPage + 2)) {
+                paginationHTML += `<button onclick="blog.loadPosts(${i})">${i}</button>`;
+            } else if (i === this.currentPage - 3 || i === this.currentPage + 3) {
+                paginationHTML += `<span>...</span>`;
+            }
+        }
+
+        // Botón siguiente
+        if (this.currentPage < this.totalPages) {
+            paginationHTML += `<button onclick="blog.loadPosts(${this.currentPage + 1})">Siguiente →</button>`;
+        }
+
+        container.innerHTML = paginationHTML;
+    }
+
+    showLoading() {
+        document.getElementById('blog-posts').innerHTML = '<div class="loading">⏳ Cargando artículos...</div>';
+    }
+
+    showError(message) {
+        document.getElementById('blog-posts').innerHTML = `<div class="error">❌ ${message}</div>`;
+    }
+
+    stripHtml(html) {
+        const tmp = document.createElement('div');
+        tmp.innerHTML = html;
+        return tmp.textContent || tmp.innerText || '';
+    }
+
+    setupEventListeners() {
+        // Búsqueda (opcional)
+        const searchInput = document.getElementById('search-input');
+        if (searchInput) {
+            let searchTimeout;
+            searchInput.addEventListener('input', (e) => {
+                clearTimeout(searchTimeout);
+                searchTimeout = setTimeout(() => {
+                    this.searchPosts(e.target.value);
+                }, 500);
+            });
+        }
+    }
+
+    async searchPosts(query) {
+        if (!query.trim()) {
+            this.loadPosts(1);
+            return;
+        }
+
+        this.showLoading();
+
+        try {
+            const response = await fetch(
+                `${WORDPRESS_API_URL}/posts?search=${encodeURIComponent(query)}&_embed`
+            );
+            const posts = await response.json();
+            this.renderPosts(posts);
+            document.getElementById('pagination').innerHTML = '';
+        } catch (error) {
+            this.showError('Error en la búsqueda');
+        }
+    }
+
+    // Método para obtener posts destacados para la homepage
+    async getFeaturedPosts(limit = 3) {
+        try {
+            const response = await fetch(
+                `${WORDPRESS_API_URL}/posts?per_page=${limit}&_embed&sticky=true`
+            );
+            return await response.json();
+        } catch (error) {
+            console.error('Error cargando posts destacados:', error);
+            return [];
+        }
     }
 }
 
-// Función simple para convertir markdown a HTML (básica)
-function markdownToHtml(markdown) {
-    return markdown
-        .replace(/^# (.*$)/gim, '<h1>$1</h1>')
-        .replace(/^## (.*$)/gim, '<h2>$1</h2>')
-        .replace(/^### (.*$)/gim, '<h3>$1</h3>')
-        .replace(/\*\*(.*)\*\*/gim, '<strong>$1</strong>')
-        .replace(/\*(.*)\*/gim, '<em>$1</em>')
-        .replace(/!\[([^\]]*)\]\(([^\)]*)\)/gim, '<img alt="$1" src="$2" />')
-        .replace(/\[([^\]]*)\]\(([^\)]*)\)/gim, '<a href="$2">$1</a>')
-        .replace(/\n\n/gim, '</p><p>')
-        .replace(/^(.*)$/gim, '<p>$1</p>');
-}
-
-// Determinar qué cargar según la página
-document.addEventListener('DOMContentLoaded', function() {
-    const path = window.location.pathname;
-    
-    if (path === '/blog' || path === '/blog/') {
-        loadBlogPosts();
-    } else if (path.startsWith('/blog/')) {
-        loadSinglePost();
-    }
+// Inicializar cuando cargue la página
+let blog;
+document.addEventListener('DOMContentLoaded', () => {
+    blog = new WordPressBlog();
+    blog.init();
 });
 
-// ==========================================
-// package.json - Scripts de construcción
-// ==========================================
-
-/*
-{
-  "name": "ronald-rangel-blog",
-  "version": "1.0.0",
-  "scripts": {
-    "build": "node build-posts.js",
-    "dev": "node build-posts.js && python -m http.server 8000",
-    "prebuild": "node build-posts.js"
-  },
-  "dependencies": {
-    "gray-matter": "^4.0.3"
-  }
+// Para usar en la homepage (opcional)
+async function loadFeaturedPostsHomepage() {
+    const blogInstance = new WordPressBlog();
+    const posts = await blogInstance.getFeaturedPosts(3);
+    
+    // Renderizar en la homepage
+    const container = document.getElementById('featured-posts-home');
+    if (container && posts.length > 0) {
+        container.innerHTML = posts.map(post => blogInstance.createPostCard(post)).join('');
+    }
 }
-*/
