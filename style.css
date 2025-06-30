@@ -145,7 +145,7 @@ body { font-family: var(--font-family); background-color: var(--dark-blue); colo
     text-align: center;
     background-color: var(--dark-blue-light);
     border-bottom: 1px solid var(--dark-blue);
-    background-image: linear-gradient(rgba(30, 44, 58, 0.8), rgba(30, 44, 58, 1)), url('/assets/img/blog-header-bg.webp');
+    background-image: linear-gradient(rgba(30, 44, 58, 0.8), rgba(30, 44, 58, 1)), url('../assets/img/blog-header-bg.webp');
 }
 .blog-hero h1 { font-size: clamp(2.5rem, 6vw, 4.5rem); font-weight: 900; color: var(--off-white); line-height: 1.1; }
 .blog-hero p { font-size: 1.2rem; color: var(--grey-text); max-width: 600px; margin: 15px auto 0; }
