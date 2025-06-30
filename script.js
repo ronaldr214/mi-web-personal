@@ -25,28 +25,32 @@ document.addEventListener('DOMContentLoaded', function() {
         gsap.from(".hero-text-panel > *", { duration: 1, y: 40, opacity: 0, stagger: 0.2, ease: 'power3.out', delay: 0.5 });
         gsap.from(".main-header", { duration: 1, y: -100, opacity: 0, ease: 'power3.out', delay: 0.8 });
 
-        // Animaciones para las secciones al hacer scroll
-        const sectionsToAnimate = ['.service-card', '.plan-card', '.about-main-profile', '.team-member-card', '.contact-section > *'];
-        
-        sectionsToAnimate.forEach(selector => {
-            gsap.from(selector, {
-                scrollTrigger: {
-                    trigger: selector,
-                    start: "top 85%",
-                    toggleActions: "play none none none"
-                },
-                duration: 0.8,
-                y: 50,
-                opacity: 0,
-                stagger: 0.2,
-                ease: 'power3.out'
-            });
+        // Animación para las Tarjetas de Servicio
+        gsap.from(".service-card", {
+            scrollTrigger: { trigger: ".services-section", start: "top 80%", toggleActions: "play none none none" },
+            duration: 0.8, y: 50, opacity: 0, stagger: 0.2, ease: 'power3.out'
         });
-    }
 
-    // --- Lógica para el Blog (si el script del blog está en esta página) ---
-    const featuredContainer = document.getElementById('featured-posts-container');
-    if (featuredContainer && typeof loadFeaturedPosts === 'function') {
-        loadFeaturedPosts(); // Asume que tienes una función para cargar posts destacados
+        // Animación para las Tarjetas de Planes
+        gsap.from(".plan-card", {
+            scrollTrigger: { trigger: ".plans-section", start: "top 80%", toggleActions: "play none none none" },
+            duration: 0.8, y: 50, opacity: 0, stagger: 0.2, ease: 'power3.out'
+        });
+
+        // Animación para la Sección Sobre Mí
+        gsap.from(".about-main-profile", {
+            scrollTrigger: { trigger: ".about-section", start: "top 70%", toggleActions: "play none none none" },
+            duration: 1, x: -100, opacity: 0, ease: 'power3.out'
+        });
+        gsap.from(".team-member-card", {
+            scrollTrigger: { trigger: ".team-grid", start: "top 80%", toggleActions: "play none none none" },
+            duration: 0.7, y: 50, opacity: 0, stagger: 0.2, ease: 'power3.out'
+        });
+
+        // Animación para la Sección de Contacto
+         gsap.from(".contact-section > *", {
+            scrollTrigger: { trigger: ".contact-section", start: "top 80%", toggleActions: "play none none none" },
+            duration: 1, y: 50, opacity: 0, stagger: 0.3, ease: 'power3.out'
+        });
     }
 });
