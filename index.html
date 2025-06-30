@@ -22,21 +22,23 @@
 <body>
 
     <header class="main-header">
-        <div class="container">
+        <nav class="main-nav container">
             <div class="logo">
                 <a href="#inicio"><img src="assets/logo.webp" alt="Logo Ronald Rangel"></a>
             </div>
-            <nav class="nav">
-                 <ul class="nav-links">
+            <div class="nav-menu">
+                 <ul class="nav-links" data-visible="false">
                     <li><a href="#inicio">Inicio</a></li>
                     <li><a href="#servicios">Servicios</a></li>
                     <li><a href="#planes">Planes</a></li>
                     <li><a href="#sobre-mi">Sobre Mí</a></li>
                     <li><a href="#contacto">Contacto</a></li>
                 </ul>
-            </nav>
-             <button class="mobile-nav-toggle" aria-expanded="false"><span class="sr-only">Menú</span></button>
-        </div>
+            </div>
+            <button class="mobile-nav-toggle" aria-controls="primary-navigation" aria-expanded="false">
+                <span class="sr-only">Menú</span>
+            </button>
+        </nav>
     </header>
 
     <main>
@@ -63,29 +65,15 @@
             </div>
         </section>
 
-        <section id="planes" class="plans-section"></section>
-        
-        <section id="sobre-mi" class="about-section">
+        <section id="planes" class="plans-section">
             <div class="container">
-                <div class="about-main-profile"><img src="assets/ronald-about.webp" alt="Foto de Ronald Rangel" class="about-photo-main"><div class="about-text"></div></div>
-                <div class="team-grid">
-                    <div class="team-member-card"><img src="assets/team-1.webp" alt="Foto de Laura Gómez"><h4>Laura Gómez</h4><span>Diseñadora Visual</span></div>
-                    <div class="team-member-card"><img src="assets/team-2.webp" alt="Foto de Andrés Ruiz"><h4>Andrés Ruiz</h4><span>Desarrollador Front-End</span></div>
-                    <div class="team-member-card"><img src="assets/team-3.webp" alt="Foto de Camila Torres"><h4>Camila Torres</h4><span>Estratega de Contenidos e IA</span></div>
+                <h2 class="section-title">Planes Estratégicos para Impulsar tu Negocio</h2>
+                <div class="plans-grid">
+                    <div class="plan-card"><h3>Despegue Estratégico</h3><p class="plan-description">Ideal para emprendedores que están lanzando su segundo negocio y necesitan una base sólida.</p><div class="plan-price"><span class="offer-price">$899.000 <span class="currency">COP</span></span></div><ul class="plan-features"><li><i class="fas fa-check-circle"></i> Sesión 1:1 de diagnóstico estratégico (60 min)</li><li><i class="fas fa-check-circle"></i> Auditoría exprés de tu presencia digital actual</li><li><i class="fas fa-check-circle"></i> Guía de acción personalizada con próximos pasos</li><li><i class="fas fa-check-circle"></i> Recomendaciones de herramientas digitales y de IA</li><li><i class="fas fa-check-circle"></i> Acceso a una plantilla exclusiva para estructurar tu oferta</li></ul><div class="plan-cta"><a href="https://mpago.li/1La11v8" target="_blank" class="cta-button plan-main-cta">ADQUIRIR PLAN</a><a href="https://wa.me/573002278962?text=Hola%20Ronald,%20estoy%20interesado%20en%20el%20Plan%20Despegue%20Estrat%C3%A9gico%20y%20tengo%20una%20pregunta." target="_blank" class="plan-secondary-cta">Tengo una pregunta</a></div></div>
+                    <div class="plan-card highlighted"><div class="highlight-badge">MÁS POPULAR</div><h3>Marca con Rumbo</h3><p class="plan-description">Para quienes necesitan construir o rediseñar su marca y sitio web con visión de negocio y enfoque comercial.</p><div class="plan-price"><span class="offer-price">$1.499.999 <span class="currency">COP</span></span></div><ul class="plan-features"><li><i class="fas fa-check-circle"></i> Consultoría de branding y tono de marca</li><li><i class="fas fa-check-circle"></i> Boceto estratégico de sitio web (wireframe + estructura)</li><li><i class="fas fa-check-circle"></i> Revisión de identidad visual (colores, tipografía, logo)</li><li><i class="fas fa-check-circle"></i> Roadmap de contenidos y estrategia de visibilidad</li><li><i class="fas fa-check-circle"></i> Recomendaciones de IA para optimizar procesos creativos</li></ul><div class="plan-cta"><a href="https://mpago.li/1nFLPLW" target="_blank" class="cta-button plan-main-cta">ADQUIRIR PLAN</a><a href="https://wa.me/573002278962?text=Hola%20Ronald,%20estoy%20interesado%20en%20el%20Plan%20Marca%20con%20Rumbo%20y%20tengo%20una%20pregunta." target="_blank" class="plan-secondary-cta">Tengo una pregunta</a></div></div>
+                    <div class="plan-card"><h3>Ecosistema Digital Pro</h3><p class="plan-description">Pensado para emprendedores listos para escalar: construimos una marca fuerte, una web que vende y procesos automatizados.</p><div class="plan-price"><span class="offer-price">$1.699.999 <span class="currency">COP</span></span></div><ul class="plan-features"><li><i class="fas fa-check-circle"></i> Desarrollo completo de sitio web personalizado (hasta 5 secciones)</li><li><i class="fas fa-check-circle"></i> Consultoría estratégica + asesoría mensual (2 sesiones)</li><li><i class="fas fa-check-circle"></i> Integración con WhatsApp, formularios y CRM básico</li><li><i class="fas fa-check-circle"></i> Diseño de branding completo (logo, paleta, tono, estilo visual)</li><li><i class="fas fa-check-circle"></i> Automatización básica con herramientas de IA y marketing</li></ul><div class="plan-cta"><a href="https://mpago.li/1Yota2t" target="_blank" class="cta-button plan-main-cta">ADQUIRIR PLAN</a><a href="https://wa.me/573002278962?text=Hola%20Ronald,%20estoy%20interesado%20en%20el%20Plan%20Ecosistema%20Digital%20Pro%20y%20tengo%20una%20pregunta." target="_blank" class="plan-secondary-cta">Tengo una pregunta</a></div></div>
                 </div>
             </div>
         </section>
         
-        <section id="contacto" class="contact-section"></section>
-    </main>
-
-    <footer class="main-footer"></footer>
-
-    <a href="https://wa.me/573002278962" target="_blank" class="floating-whatsapp"><i class="fa-brands fa-whatsapp"></i><span>Hablemos</span></a>
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
-    <script src="script.js"></script>
-
-</body>
-</html>
+        <section id="sobre-mi" class="about-section">
