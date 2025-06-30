@@ -1,22 +1,35 @@
 [
   {
-    "titulo": "El Segundo Round: Cómo Usar los Errores de tu Primer Negocio como Arma Secreta",
-    "slug": "2025-06-29-el-segundo-round-cómo-usar-los-errores-de-tu-primer-negocio-como-arma-secreta",
-    "fecha": "2025-06-29",
-    "extracto": "La experiencia no es lo que te pasa, es lo que haces con lo que te pasa.",
-    "imagen_principal": "assets/ia-emprendimiento.jpg",
-    "categoría": "Emprendimiento Digital",
-    "tiempo_de_lectura": 4,
-    "destacado": true
+    "titulo": "Cómo la IA está transformando el marketing digital en 2025",
+    "slug": "ia-transformando-marketing-digital-2025",
+    "categoria": "Inteligencia Artificial",
+    "fecha": "2025-06-30",
+    "autor": "Ronald Rangel",
+    "destacado": true,
+    "imagen_principal": "assets/blog/ia-marketing-2025.webp",
+    "resumen": "Descubre las últimas tendencias y herramientas de IA que están revolucionando la forma en que las marcas se conectan con su audiencia.",
+    "contenido": "# Cómo la IA está transformando el marketing digital en 2025\n\nLa inteligencia artificial ha dejado de ser una promesa futurista para convertirse en una realidad tangible que está transformando radicalmente el panorama del marketing digital...\n\n## Las principales tendencias de IA en marketing\n\n1. **Personalización a escala**\n2. **Automatización inteligente**\n3. **Análisis predictivo avanzado**\n\n¿Estás listo para implementar estas tecnologías en tu estrategia?"
   },
   {
-    "titulo": "Otro Post de Prueba",
-    "slug": "otro-post-de-prueba",
+    "titulo": "Branding personal: Tu marca es tu superpoder",
+    "slug": "branding-personal-superpoder",
+    "categoria": "Branding",
+    "fecha": "2025-06-28",
+    "autor": "Ronald Rangel",
+    "destacado": true,
+    "imagen_principal": "assets/blog/branding-personal.webp",
+    "resumen": "Aprende a construir una marca personal auténtica que te diferencie en un mercado saturado.",
+    "contenido": "# Branding personal: Tu marca es tu superpoder\n\nEn un mundo digital saturado, tu marca personal no es un lujo, es una necesidad. Es lo que te diferencia de la competencia y lo que hace que los clientes te elijan a ti...\n\n## Los pilares de una marca personal sólida\n\n- **Autenticidad**\n- **Consistencia**\n- **Valor único**\n- **Conexión emocional**"
+  },
+  {
+    "titulo": "Desarrollo web estratégico para emprendedores",
+    "slug": "desarrollo-web-estrategico-emprendedores",
+    "categoria": "Desarrollo Web",
     "fecha": "2025-06-25",
-    "extracto": "Solo un ejemplo de contenido",
-    "imagen_principal": "assets/imagen-prueba.jpg",
-    "categoría": "Innovación",
-    "tiempo_de_lectura": 3,
-    "destacado": true
+    "autor": "Ronald Rangel",
+    "destacado": false,
+    "imagen_principal": "assets/blog/desarrollo-web-estrategico.webp",
+    "resumen": "Una web no es solo código, es tu herramienta de ventas más poderosa. Te enseño cómo crearla estratégicamente.",
+    "contenido": "# Desarrollo web estratégico para emprendedores\n\nTu sitio web es mucho más que una tarjeta de presentación digital. Es tu vendedor 24/7, tu embajador de marca y tu principal herramienta de conversión..."
   }
 ]
