@@ -1,12 +1,11 @@
 document.addEventListener('DOMContentLoaded', async () => {
-    const featuredContainer = document.getElementById('featured-posts-container');
-    const blogContainer = document.getElementById('blog-posts-container');
-    const postContainer = document.getElementById('post-container');
+    const postsContainer = document.getElementById('postsContainer');
     const categoriesContainer = document.getElementById('category-filters-container');
     const searchInput = document.getElementById('searchInput');
 
-    let allPosts = [];
+    let allPosts = []; // Guardaremos todos los posts aquí para no pedirlos cada vez
 
+    // Parsea los metadatos de cada archivo Markdown
     const parseFrontMatter = (text) => {
         const frontMatterMatch = text.match(/---([\s\S]*?)---/);
         if (!frontMatterMatch) return {};
@@ -23,100 +22,87 @@ document.addEventListener('DOMContentLoaded', async () => {
         return metadata;
     };
 
-    const getPosts = async () => {
-        if (allPosts.length > 0) return allPosts;
-
-        // Lista de archivos de posts. Esta lista deberá ser mantenida manualmente o generada
-        // por un script en un entorno de construcción más avanzado.
-        const postsList = [
-            '2025-06-29-bienvenidos-a-mi-blog.md',
-            '2025-06-29-5-prompts-de-ia-para-startups.md' // Ejemplo
+    // Carga todos los posts
+    const loadPosts = async () => {
+        // En un futuro, aquí podrías cargar un archivo `posts.json` para no listar los archivos a mano.
+        const postFiles = [
+            '2025-06-29-5-prompts-de-ia-para-startups.md',
+            '2025-06-29-bienvenidos-a-mi-blog.md'
         ];
-        
-        try {
-            const postPromises = postsList.map(async (postFile) => {
-                const response = await fetch(`/posts/${postFile}`);
-                if (!response.ok) return null;
-                const text = await response.text();
-                const metadata = parseFrontMatter(text);
-                const content = text.split('---').slice(2).join('---').trim();
-                return { ...metadata, content, slug: postFile.replace('.md', '') };
-            });
 
-            const resolvedPosts = (await Promise.all(postPromises)).filter(p => p);
-            allPosts = resolvedPosts.sort((a, b) => new Date(b.date) - new Date(a.date));
-            return allPosts;
-        } catch (error) {
-            console.error("Error al cargar los posts:", error);
-            return [];
-        }
+        const postPromises = postFiles.map(file => 
+            fetch(`/posts/${file}`)
+                .then(response => response.text())
+                .then(text => {
+                    const data = parseFrontMatter(text);
+                    data.slug = file.replace('.md', '');
+                    return data;
+                })
+        );
+        allPosts = await Promise.all(postPromises);
+        allPosts.sort((a, b) => new Date(b.date) - new Date(a.date));
+        displayPosts(allPosts);
+        createCategoryFilters();
     };
-    
-    const renderPosts = (postsToRender) => {
-        if (!blogContainer) return;
-        blogContainer.innerHTML = '';
-        if (postsToRender.length === 0) {
-            blogContainer.innerHTML = "<p>No se encontraron artículos que coincidan con tu búsqueda.</p>";
-            return;
-        }
-        postsToRender.forEach(post => {
-            const excerpt = post.subtitle || post.content.substring(0, 150) + '...';
-            const postCard = `
-                <div class="blog-card">
-                     <a href="/post.html?slug=${post.slug}" class="card-image-link">
-                        <img src="${post.thumbnail || '/assets/img/placeholder.webp'}" alt="${post.title || ''}">
+
+    // Muestra los posts en el HTML
+    const displayPosts = (posts) => {
+        if (!postsContainer) return;
+        postsContainer.innerHTML = posts.map(post => {
+            const excerpt = post.subtitle || 'Haz clic para leer más...';
+            return `
+            <article class="post-card">
+                <a href="/post.html?slug=${post.slug}" class="post-image-link">
+                    <img src="${post.thumbnail}" alt="${post.title}" class="post-image">
+                </a>
+                <div class="post-content">
+                    <span class="post-category">${post.category}</span>
+                    <a href="/post.html?slug=${post.slug}" style="text-decoration:none;">
+                        <h2 class="post-title">${post.title}</h2>
                     </a>
-                    <div class="card-content">
-                        <span class="card-category">${post.category || 'General'}</span>
-                        <h3><a href="/post.html?slug=${post.slug}">${post.title || 'Sin Título'}</a></h3>
-                        <p>${excerpt}</p>
-                        <a href="/post.html?slug=${post.slug}" class="card-read-more">Leer Más <i class="fas fa-arrow-right"></i></a>
+                    <p class="post-excerpt">${excerpt}</p>
+                    <div class="post-footer">
+                        <span class="post-date">${new Date(post.date).toLocaleDateString('es-CO', {day: 'numeric', month: 'long', year: 'numeric'})}</span>
+                        <a href="/post.html?slug=${post.slug}" class="read-more">Leer Más <i class="fas fa-arrow-right"></i></a>
                     </div>
                 </div>
+            </article>
             `;
-            blogContainer.innerHTML += postCard;
-        });
+        }).join('');
     };
-    
-    const setupFilters = (posts) => {
-        if (!categoriesContainer) return;
-        const categories = [...new Set(posts.map(p => p.category).filter(c => c))];
-        categories.forEach(category => {
-            const button = document.createElement('button');
-            button.className = 'filter-btn';
-            button.dataset.category = category;
-            button.innerText = category;
-            categoriesContainer.appendChild(button);
-        });
 
-        categoriesContainer.addEventListener('click', (e) => {
+    // Crea los botones de filtro de categoría
+    const createCategoryFilters = () => {
+        if (!categoriesContainer) return;
+        const categories = ['all', ...new Set(allPosts.map(post => post.category))];
+        categoriesContainer.innerHTML = categories.map(category => 
+            `<button class="filter-btn ${category === 'all' ? 'active' : ''}" data-category="${category}">
+                ${category.charAt(0).toUpperCase() + category.slice(1)}
+            </button>`
+        ).join('');
+    };
+
+    // Lógica para filtrar
+    if (categoriesContainer) {
+        categoriesContainer.addEventListener('click', e => {
             if (e.target.tagName === 'BUTTON') {
                 document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
                 e.target.classList.add('active');
                 const category = e.target.dataset.category;
-                const filteredPosts = category === 'all' ? allPosts : allPosts.filter(p => p.category === category);
-                renderPosts(filteredPosts);
+                const filtered = category === 'all' ? allPosts : allPosts.filter(p => p.category === category);
+                displayPosts(filtered);
             }
         });
-    };
-    
-    // ... (la función renderSinglePost se mantiene igual)
+    }
 
-    // --- Lógica de Ejecución ---
-    if (blogContainer) {
-        getPosts().then(posts => {
-            renderPosts(posts);
-            setupFilters(posts);
+    // Lógica para buscar
+    if (searchInput) {
+        searchInput.addEventListener('input', e => {
+            const searchTerm = e.target.value.toLowerCase();
+            const filtered = allPosts.filter(p => p.title.toLowerCase().includes(searchTerm) || p.subtitle.toLowerCase().includes(searchTerm));
+            displayPosts(filtered);
         });
     }
 
-    if (featuredContainer) {
-        getPosts().then(posts => {
-            // Lógica para renderizar los posts destacados
-        });
-    }
-
-    if (postContainer) {
-        // Lógica para renderizar un solo post
-    }
+    loadPosts();
 });
