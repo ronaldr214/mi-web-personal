@@ -70,16 +70,16 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
 
                 if (metadata.destacado?.toLowerCase() === 'true') {
-                    const html = `
-                        <article class="post-card">
-                            ${metadata["imagen principal"] ? `<img src="${metadata["imagen principal"]}" alt="${metadata["pie de imagen"] || metadata.título}">` : ''}
-                            <div class="post-card-content">
-                                <h3>${metadata.título}</h3>
-                                ${metadata.subtítulo ? `<p><em>${metadata.subtítulo}</em></p>` : ''}
-                                <p>${metadata.extracto || metadata["descripción corta del post"] || ''}</p>
-                                <p class="post-meta">${metadata.categoría || ''} · ${metadata["tiempo de lectura"] || '?'} min</p>
-                            </div>
-                        </article>
+                  const html = `
+                  <article class="post-card">
+                ${metadata["imagen principal"] ? `<img src="${metadata["imagen principal"]}" alt="${metadata["pie de imagen"] || metadata.título}">` : ''}
+                <div class="post-card-content">
+                  <h3>${metadata.título}</h3>
+                  ${metadata.subtítulo ? `<p><em>${metadata.subtítulo}</em></p>` : ''}
+              <p>${metadata.extracto || metadata["descripción corta del post"] || ''}</p>
+              <p class="post-meta">${metadata.categoría || ''} · ${metadata["tiempo de lectura"] || '?'} min</p>
+            </div>
+              </article>
                     `;
                     const wrapper = document.createElement('div');
                     wrapper.innerHTML = html.trim();
