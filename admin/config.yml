@@ -2,53 +2,19 @@ backend:
   name: git-gateway
   branch: main
 
-publish_mode: editorial_workflow
-
-media_folder: "static/uploads"
-public_folder: "/uploads"
+media_folder: "assets/blog"
+public_folder: "assets/blog"
 
 collections:
   - name: "blog"
     label: "Blog Posts"
-    folder: "content/blog"
+    folder: "_posts"
     create: true
     slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
     fields:
-      - {label: "Título", name: "title", widget: "string", required: true}
-      - {label: "Subtítulo", name: "subtitle", widget: "string", required: false}
-      - {label: "Extracto/Resumen", name: "excerpt", widget: "text", required: true, 
-         hint: "Descripción corta del post para mostrar en la lista"}
-      - {label: "Fecha de Publicación", name: "date", widget: "datetime", required: true}
-      - {label: "Imagen Principal", name: "featured_image", widget: "image", required: false}
-      - {label: "Pie de Imagen", name: "image_caption", widget: "string", required: false}
-      - {label: "Categoría", name: "category", widget: "select", 
-         options: ["Estrategia Digital", "Marketing", "Desarrollo Web", "SEO", "Social Media", "Analytics", "Tecnología"]}
-      - {label: "Tags", name: "tags", widget: "list", default: [], 
-         hint: "Palabras clave separadas por comas"}
-      - {label: "Autor", name: "author", widget: "string", default: "Ronald Rangel"}
-      - {label: "Estado", name: "status", widget: "select", 
-         options: ["draft", "published"], default: "draft"}
-      - {label: "Destacado", name: "featured", widget: "boolean", default: false,
-         hint: "Marcar si quieres que aparezca en la sección destacados"}
-      - {label: "Tiempo de Lectura (minutos)", name: "reading_time", widget: "number", 
-         default: 5, min: 1, max: 60}
-      - {label: "Meta Description (SEO)", name: "meta_description", widget: "text", 
-         required: false, hint: "Descripción para motores de búsqueda"}
-      - {label: "Contenido", name: "body", widget: "markdown", required: true}
-      
-  - name: "pages"
-    label: "Páginas"
-    files:
-      - label: "Página de Inicio"
-        name: "index"
-        file: "content/pages/index.md"
-        fields:
-          - {label: "Título", name: "title", widget: "string"}
-          - {label: "Descripción", name: "description", widget: "text"}
-          - {label: "Contenido", name: "body", widget: "markdown"}
-      - label: "Sobre Mí"
-        name: "about"
-        file: "content/pages/about.md"
-        fields:
-          - {label: "Título", name: "title", widget: "string"}
-          - {label: "Contenido", name: "body", widget: "markdown"}
+      - { label: "Título", name: "titulo", widget: "string" }
+      - { label: "Slug", name: "slug", widget: "string", hint: "URL amigable (ej: mi-articulo-genial)" }
+      - { label: "Categoría", name: "categoria", widget: "select", options: ["Desarrollo Web", "Branding", "Inteligencia Artificial", "Marketing", "Emprendimiento"] }
+      - { label: "Fecha de publicación", name: "fecha", widget: "date" }
+      - { label: "Autor", name: "autor", widget: "string", default: "Ronald Rangel" }
+      - { label: "Destacado", name: "destac
