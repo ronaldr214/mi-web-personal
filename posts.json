@@ -1,0 +1,22 @@
+[
+  {
+    "titulo": "El Segundo Round: Cómo Usar los Errores de tu Primer Negocio como Arma Secreta",
+    "slug": "2025-06-29-el-segundo-round-como-usar-los-errores-de-tu-primer-negocio-como-arma-secreta",
+    "fecha": "2025-06-29",
+    "extracto": "La experiencia no es lo que te pasa, es lo que haces con lo que te pasa.",
+    "imagen_principal": "assets/ia-emprendimiento.jpg",
+    "categoria": "Emprendimiento Digital",
+    "tiempo_de_lectura": 4,
+    "destacado": true
+  },
+  {
+    "titulo": "Otro Post de Prueba",
+    "slug": "otro-post-de-prueba",
+    "fecha": "2025-06-25",
+    "extracto": "Solo un ejemplo de contenido",
+    "imagen_principal": "assets/imagen-prueba.jpg",
+    "categoria": "Innovación",
+    "tiempo_de_lectura": 3,
+    "destacado": true
+  }
+]
