@@ -1,193 +1,102 @@
-
 <!DOCTYPE html>
-<html lang="es-CO">
+<html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ronald Rangel - Estratega Digital | Desarrollo Web, Branding & IA</title>
-    <meta name="description" content="Acompaño a emprendedores a potenciar su negocio con desarrollo web estratégico, branding con propósito y asesorías en inteligencia artificial en Colombia.">
-    <meta name="keywords" content="Desarrollo web en Colombia para emprendedores, asesor de marca personal, consultor de inteligencia artificial, marketing para startups, estratega digital">
-    <meta property="og:title" content="Ronald Rangel - Estratega Digital">
-    <meta property="og:description" content="Las marcas no se improvisan, se construyen con estrategia.">
-    <meta property="og:image" content="assets/social-share.webp">
-    <meta property="og:url" content="https://www.ronaldrangel.com.co">
-    <meta property="og:type" content="website">
-    <link rel="icon" type="image/webp" href="assets/favicon.webp">
-    <link rel="apple-touch-icon" href="assets/favicon.webp">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700;900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ronald Rangel | Comunicador Digital</title>
+  <link rel="stylesheet" href="style.css" />
+  <script src="script.js" defer></script>
 </head>
 <body>
 
-<header class="main-header">
-    <nav class="main-nav container">
-        <div class="logo"><a href="#inicio"><img src="assets/logo.webp" alt="Logo Ronald Rangel"></a></div>
-        <div class="nav-menu">
-            <ul class="nav-links" data-visible="false">
-                <li><a href="#inicio">Inicio</a></li>
-                <li><a href="#servicios">Servicios</a></li>
-                <li><a href="#planes">Planes</a></li>
-                <li><a href="#sobre-mi">Sobre Mí</a></li>
-                <li><a href="#contacto">Contacto</a></li>
-            </ul>
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="container">
+      <h1>Las marcas no se improvisan, se construyen con estrategia.</h1>
+      <p>Soy Ronald Rangel, comunicador digital y estratega creativo. Acompaño a emprendedores como tú a potenciar su negocio o marca con desarrollo web, branding y asesoría en inteligencia artificial.</p>
+      <a href="https://wa.me/3002278962" class="btn">AGENDA AHORA, ES GRATIS</a>
+    </div>
+  </section>
+
+  <!-- Misión -->
+  <section class="section light-bg">
+    <div class="container">
+      <h2 class="section-title">Mi Misión es Verte Crecer</h2>
+      <p>Creo en el poder de la estrategia, la creatividad y la tecnología para construir marcas con propósito. Cada proyecto es una oportunidad para ayudarte a crecer y dejar huella.</p>
+    </div>
+  </section>
+
+  <!-- Sobre Mí -->
+  <section class="section dark-bg">
+    <div class="container">
+      <h2 class="section-title">¿En qué puedo ayudarte?</h2>
+      <p>Con más de 15 años de experiencia, combino el diseño, la comunicación y la tecnología para construir soluciones creativas que conectan.</p>
+    </div>
+  </section>
+
+  <!-- Servicios -->
+  <section class="section light-bg">
+    <div class="container">
+      <h2 class="section-title">Planes Estratégicos para Impulsar tu Negocio</h2>
+      <div class="services-grid">
+        <div class="service-card">
+          <h3>Plan Despegue</h3>
+          <p>Ideal para quienes están comenzando</p>
+          <ul>
+            <li>Landing Page profesional</li>
+            <li>Asesoría personalizada</li>
+            <li>Instalación de WhatsApp</li>
+            <li>Hosting gratuito 1 año</li>
+          </ul>
+          <span class="price">$329 USD</span>
         </div>
-        <button class="mobile-nav-toggle" aria-controls="primary-navigation" aria-expanded="false">
-            <span class="sr-only">Menú</span>
-        </button>
-    </nav>
-</header>
-
-<main>
-<section id="inicio" class="hero-section">
-    <div class="hero-text-panel">
-        <h1>Las marcas no se improvisan, se construyen con <span class="highlight">estrategia.</span></h1>
-        <p>Soy Ronald Rangel, comunicador digital y estratega creativo. Acompaño a emprendedores como tú a potenciar su negocio o marca con desarrollo web, branding y asesoría en inteligencia artificial.</p>
-        <a href="https://wa.me/573002278962?text=Hola%20Ronald,%20vengo%20de%20tu%20web%20y%20quisiera%20agendar%20una%20consultor%C3%ADa." target="_blank" class="cta-button">AGENDA AHORA, ES GRATIS</a>
-    </div>
-    <div class="hero-image-panel">
-        <img src="assets/hero-photo.webp" alt="Ronald Rangel, estratega digital">
-    </div>
-</section>
-
-<section id="servicios" class="services-section">
-    <div class="container">
-        <h2 class="section-title">¿En qué puedo ayudarte?</h2>
-        <!-- cards de servicios aquí (omitidas por longitud) -->
-    </div>
-</section>
-
-<section id="planes" class="plans-section">
-    <div class="container">
-        <h2 class="section-title">Planes Estratégicos para Impulsar tu Negocio</h2>
-        <!-- cards de planes aquí (omitidas por longitud) -->
-    </div>
-</section>
-
-<section id="blog" class="blog-section">
-    <div class="container">
-        <h2 class="section-title">Últimos Artículos</h2>
-        <div id="blog-container" class="blog-container"></div>
-    </div>
-</section>
-
-<section id="sobre-mi" class="about-section">
-    <div class="container">
-        <div class="about-main-profile">
-            <img src="assets/ronald-about.webp" alt="Foto de Ronald Rangel" class="about-photo-main">
-            <div class="about-text">
-                <h2 class="section-title left-aligned">Mi Misión es Verte Crecer</h2>
-                <p>Llevo más de 15 años acompañando a marcas, personas y proyectos a encontrar su voz en el mundo digital. No creo en las fórmulas mágicas, creo en el poder de una estrategia bien pensada, en la autenticidad y en las conexiones reales.</p>
-                <p><strong>Si estás listo para llevar tu negocio al siguiente nivel, estoy aquí para guiarte con claridad, experiencia y corazón.</strong></p>
-                <a href="https://wa.me/573002278962" target="_blank" class="cta-button">TE PUEDO ATENDER AHORA MISMO</a>
-            </div>
+        <div class="service-card">
+          <h3>Plan Escala</h3>
+          <p>Para quienes ya tienen presencia y quieren vender más</p>
+          <ul>
+            <li>Web profesional con blog</li>
+            <li>Copywriting estratégico</li>
+            <li>Integración de pasarela de pago</li>
+            <li>Soporte premium</li>
+          </ul>
+          <span class="price">$529 USD</span>
         </div>
-    </div>
-</section>
-
-<section id="contacto" class="contact-section">
-    <div class="container">
-        <h2>No lo pienses más y contacta ahora</h2>
-        <p>Es momento de diferenciarte de la competencia. Te ayudo en todo el proceso.</p>
-        <a href="https://wa.me/573002278962" target="_blank" class="cta-button">AGENDAR CONSULTORÍA</a>
-    </div>
-</section>
-</main>
-
-<footer class="main-footer">
-    <div class="container">
-        <div class="social-links">
-            <a href="#"><i class="fa-brands fa-linkedin-in"></i></a>
-            <a href="#"><i class="fa-brands fa-youtube"></i></a>
-            <a href="#"><i class="fa-brands fa-twitter"></i></a>
-            <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
+        <div class="service-card">
+          <h3>Plan Impacto</h3>
+          <p>Para marcas que quieren diferenciarse</p>
+          <ul>
+            <li>Web personalizada</li>
+            <li>Branding completo</li>
+            <li>Consultoría IA aplicada</li>
+            <li>Automatizaciones</li>
+          </ul>
+          <span class="price">$799 USD</span>
         </div>
-        <p class="copyright-text">© 2025 Ronald Rangel. Todos los derechos reservados.</p>
+      </div>
     </div>
-</footer>
+  </section>
 
-<a href="https://wa.me/573002278962" target="_blank" class="floating-whatsapp">
-    <i class="fa-brands fa-whatsapp"></i><span>Hablemos</span>
-</a>
+  <!-- Últimos Artículos -->
+  <section class="section dark-bg">
+    <div class="container">
+      <h2 class="section-title">Últimos Artículos</h2>
+      <div id="blog-posts" class="posts-grid"></div>
+    </div>
+  </section>
 
-<script>
-document.addEventListener("DOMContentLoaded", () => {
-    const blogContainer = document.getElementById("blog-container");
+  <!-- Contacto -->
+  <section class="section light-bg">
+    <div class="container">
+      <h2 class="section-title">Conversemos</h2>
+      <p>¿Tienes un proyecto en mente o quieres una asesoría? Hablemos y hagamos que tu idea tome forma.</p>
+      <a href="https://wa.me/3002278962" class="btn">Escríbeme por WhatsApp</a>
+    </div>
+  </section>
 
-    fetch("posts.json")
-        .then(response => response.json())
-        .then(posts => {
-            const destacados = posts.filter(post => post.destacado);
-            destacados.forEach(post => {
-                const card = document.createElement("div");
-                card.className = "blog-card";
-                card.innerHTML = `
-                    <div class="blog-image" style="background-image: url('${post.imagen_principal}');"></div>
-                    <div class="blog-content">
-                        <span class="blog-category">${post.categoria}</span>
-                        <h3 class="blog-title">${post.titulo}</h3>
-                        <a href="/blog/${post.slug}" class="blog-link">Leer más →</a>
-                    </div>`;
-                blogContainer.appendChild(card);
-                gsap.from(card, { opacity: 0, y: 50, duration: 0.5, ease: "power2.out" });
-            });
-        })
-        .catch(error => console.error("Error cargando los posts:", error));
-});
-</script>
-
-<style>
-.blog-container {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 2rem;
-    justify-content: center;
-    padding: 2rem 1rem;
-}
-.blog-card {
-    background: #0e1e2e;
-    border-radius: 1rem;
-    overflow: hidden;
-    width: 320px;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.25);
-    transition: transform 0.3s ease;
-}
-.blog-card:hover {
-    transform: translateY(-5px);
-}
-.blog-image {
-    height: 180px;
-    background-size: cover;
-    background-position: center;
-}
-.blog-content {
-    padding: 1rem;
-}
-.blog-category {
-    font-size: 0.9rem;
-    color: #00ffff;
-}
-.blog-title {
-    font-size: 1.2rem;
-    font-weight: bold;
-    color: white;
-    margin: 0.5rem 0;
-}
-.blog-link {
-    display: inline-block;
-    margin-top: 0.5rem;
-    color: #00ffff;
-    font-weight: bold;
-    text-decoration: none;
-}
-</style>
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
-<script src="script.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  <!-- Botón flotante WhatsApp -->
+  <a href="https://wa.me/3002278962" class="whatsapp-float" target="_blank">
+    <img src="assets/whatsapp-icon.svg" alt="WhatsApp">
+  </a>
 
 </body>
 </html>
