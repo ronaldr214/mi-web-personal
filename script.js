@@ -18,9 +18,25 @@ document.addEventListener('DOMContentLoaded', function() {
     // --- Lógica de Animaciones GSAP ---
     if (typeof gsap !== 'undefined') {
         gsap.registerPlugin(ScrollTrigger);
-        // Animaciones para todas las secciones
-        const sectionsToAnimate = ['.hero-text-panel > *', '.service-card', '.plan-card', '.about-main-profile', '.team-member-card', '.contact-section > *'];
+
         gsap.from(".hero-image-panel", { duration: 1.2, x: '100%', ease: 'power3.out', delay: 0.2 });
-        // ... (resto de las animaciones que ya te había dado)
+        gsap.from(".hero-text-panel > *", { duration: 1, y: 40, opacity: 0, stagger: 0.2, ease: 'power3.out', delay: 0.5 });
+        gsap.from(".main-header", { duration: 1, y: -100, opacity: 0, ease: 'power3.out', delay: 0.8 });
+
+        const sections = [".service-card", ".plan-card", ".about-main-profile", ".team-member-card", ".contact-section > *"];
+        sections.forEach(selector => {
+            gsap.from(selector, {
+                scrollTrigger: {
+                    trigger: selector,
+                    start: "top 85%",
+                    toggleActions: "play none none none"
+                },
+                duration: 0.8,
+                y: 50,
+                opacity: 0,
+                stagger: 0.2,
+                ease: 'power3.out'
+            });
+        });
     }
 });
