@@ -2,7 +2,7 @@
 título: "El 'Segundo Round': Cómo Usar los Errores de tu Primer Negocio como Arma Secreta"
 fecha: "2025-06-29"
 extracto: "La experiencia no es lo que te pasa, es lo que haces con lo que te pasa."
-imagen principal: "/uploads/ia-emprendimiento.jpg"
+"imagen principal: "/assets/ia-emprendimiento.jpg"
 categoría: "Emprendimiento Digital"
 tiempo de lectura: 4
 destacado: true
