@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Blog de Estrategia Digital - Ronald Rangel</title>
+    <title>Blog - Ronald Rangel, Estratega Digital</title>
     <meta name="description" content="Análisis, guías y consejos prácticos para potenciar tu marca en el mundo digital.">
     <link rel="icon" type="image/webp" href="/favicon.webp">
     <link rel="stylesheet" href="/style.css">
@@ -13,7 +13,25 @@
 <body class="blog-page">
 
     <header class="main-header">
-        </header>
+        <nav class="main-nav">
+            <div class="logo">
+                <a href="/index.html"><img src="/logo.webp" alt="Logo Ronald Rangel"></a>
+            </div>
+            <div class="nav-menu">
+                 <ul class="nav-links" data-visible="false">
+                    <li><a href="/index.html#inicio">Inicio</a></li>
+                    <li><a href="/index.html#servicios">Servicios</a></li>
+                    <li><a href="/index.html#planes">Planes</a></li>
+                    <li><a href="/blog.html">Blog</a></li>
+                    <li><a href="/index.html#sobre-mi">Sobre Mí</a></li>
+                    <li><a href="/index.html#contacto">Contacto</a></li>
+                </ul>
+            </div>
+            <button class="mobile-nav-toggle" aria-controls="primary-navigation" aria-expanded="false">
+                <span class="sr-only">Menú</span>
+            </button>
+        </nav>
+    </header>
 
     <main>
         <section class="blog-hero">
@@ -23,29 +41,25 @@
             </div>
         </section>
 
-        <section class="blog-filters">
+        <section class="blog-list-section">
             <div class="container">
-                <div class="filter-controls">
-                    <div class="search-box">
-                        <input type="text" id="searchInput" placeholder="Buscar artículos...">
-                    </div>
-                    <div class="category-filters" id="category-filters-container">
-                        <button class="filter-btn active" data-category="all">Todos</button>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section class="blog-posts">
-            <div class="container">
-                <div id="postsContainer" class="posts-grid">
+                <div class="blog-grid" id="blog-posts-container">
                     </div>
             </div>
         </section>
     </main>
 
     <footer class="main-footer">
-       </footer>
+        <div class="container">
+            <div class="social-links">
+                <a href="https://www.linkedin.com/in/ronald-rangel-ram%C3%ADrez-46877b31/" target="_blank" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+                <a href="#" target="_blank" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
+                <a href="https://x.com/ronaldrangel" target="_blank" aria-label="X"><i class="fa-brands fa-twitter"></i></a>
+                <a href="https://www.facebook.com/ronald.rangel" target="_blank" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+            </div>
+            <p class="copyright-text">© 2025 Ronald Rangel. Todos los derechos reservados.</p>
+        </div>
+    </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
     <script src="/blog.js"></script>
