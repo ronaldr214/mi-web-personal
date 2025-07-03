@@ -258,52 +258,33 @@
         </div>
     </section>
 
-    <script>
-        // Función para cargar posts destacados
-        async function loadFeaturedPosts() {
-            try {
-                const response = await fetch('/posts.json');
-                const posts = await response.json();
-                
-                if (!posts || posts.length === 0) {
-                    document.getElementById('noPosts').style.display = 'block';
-                    return;
-                }
-                
-                // Tomar los 3 posts más recientes
-                const featuredPosts = posts.slice(0, 3);
-                const postsContainer = document.getElementById('featuredPosts');
-                
-                postsContainer.innerHTML = featuredPosts.map(post => `
-                    <article class="post-card" onclick="window.location.href='${post.slug || `/blog/${post.title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)+/g, '')}`}'">
-                        <img src="${post.featured_image || post.image || '/assets/default-blog-image.webp'}" 
-                             alt="${post.title}" 
-                             class="post-image"
-                             onerror="this.src='/assets/default-blog-image.webp'">
-                        <div class="post-content">
-                            ${post.category ? `<span class="post-category">${post.category}</span>` : ''}
-                            <h3 class="post-title">${post.title}</h3>
-                            <p class="post-excerpt">${post.excerpt || post.description || (post.body ? post.body.substring(0, 150) + '...' : 'Lee este interesante artículo...')}</p>
-                            <div class="post-meta">
-                                <span>Por Ronald Rangel</span>
-                                <span>${post.date ? new Date(post.date).toLocaleDateString('es-ES', { year: 'numeric', month: 'long', day: 'numeric' }) : ''}</span>
-                            </div>
-                            <a href="${post.slug || `/blog/${post.title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)+/g, '')}`}" class="read-more">
-                                Leer más
-                            </a>
-                        </div>
-                    </article>
-                `).join('');
-                
-            } catch (error) {
-                console.error('Error loading posts:', error);
-                document.getElementById('noPosts').style.display = 'block';
+   <!-- Asegúrate de que este script esté después de la sección de posts destacados -->
+<script src="assets/wordpress-blog.js"></script>
+<script>
+    // Llama a la función para cargar posts destacados en la homepage
+    document.addEventListener('DOMContentLoaded', () => {
+        const blogInstance = new WordPressBlog(); // Crea una instancia de la clase
+        blogInstance.getFeaturedPosts(3).then(posts => { // Llama al método para obtener destacados
+            const container = document.getElementById('featuredPosts'); // Tu ID actual
+            const noPosts = document.getElementById('noPosts'); // Tu ID actual para el mensaje
+            
+            if (container && posts.length > 0) {
+                container.innerHTML = posts.map(post => blogInstance.createPostCard(post)).join('');
+                noPosts.style.display = 'none'; // Oculta el mensaje si hay posts
+            } else if (noPosts) {
+                noPosts.style.display = 'block'; // Muestra el mensaje si no hay posts
             }
-        }
-        
-        // Cargar posts cuando se carga la página
-        document.addEventListener('DOMContentLoaded', loadFeaturedPosts);
-    </script>
+        }).catch(error => {
+            console.error('Error al cargar posts destacados en la homepage:', error);
+            const noPosts = document.getElementById('noPosts');
+            if (noPosts) {
+                noPosts.textContent = 'Error al cargar los artículos destacados. Intenta más tarde.';
+                noPosts.style.display = 'block';
+            }
+        });
+    });
+</script>
+
 </body>
 </html>
 
