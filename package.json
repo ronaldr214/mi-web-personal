@@ -1,38 +1,15 @@
 {
-  "name": "ronald-rangel-website",
+  "name": "mi-web-personal",
   "version": "1.0.0",
-  "description": "Sitio web personal de Ronald Rangel - Estratega Digital",
-  "main": "index.html",
+  "description": "Sitio web personal de Ronald Rangel",
+  "main": "index.js",
   "scripts": {
-    "build": "node build-posts.js",
-    "dev": "npm run build && python -m http.server 8000",
-    "prebuild": "npm run build"
+    "build": "node build-blog.js"
   },
-  "keywords": [
-    "estrategia digital",
-    "desarrollo web",
-    "branding",
-    "inteligencia artificial"
-  ],
+  "keywords": [],
   "author": "Ronald Rangel",
-  "license": "MIT",
-  "devDependencies": {
-    "gray-matter": "^4.0.3"
-  },
-  "repository": {
-    "type": "git",
-    "url": "tu-repositorio-github-aqui"
-  }
-}
-{
-  "name": "ronald-rangel-blog",
-  "version": "1.0.0",
-  "scripts": {
-    "build": "node build-posts.js",
-    "dev": "node build-posts.js && python -m http.server 8000",
-    "prebuild": "node build-posts.js"
-  },
+  "license": "ISC",
   "dependencies": {
-    "gray-matter": "^4.0.3"
+    "axios": "^1.6.8"
   }
 }
