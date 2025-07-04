@@ -465,6 +465,58 @@ document.addEventListener("DOMContentLoaded", () => {
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 <script src="script.js"></script>
+<!-- Coloca esto justo antes de cerrar la etiqueta </body> -->
+<script>
+    document.addEventListener('DOMContentLoaded', async () => {
+        const container = document.getElementById('featuredPosts');
+        const noPostsMessage = document.getElementById('noPosts');
+
+        if (!container) {
+            console.error('No se encontró el contenedor #featuredPosts');
+            return;
+        }
+
+        try {
+            const response = await fetch('/posts.json');
+            if (!response.ok) throw new Error('No se pudo cargar posts.json');
+            
+            const allPosts = await response.json();
+            
+            // Tomar los 3 posts más recientes
+            const featuredPosts = allPosts.slice(0, 3);
+
+            if (featuredPosts.length === 0) {
+                if (noPostsMessage) noPostsMessage.style.display = 'block';
+                return;
+            }
+
+            container.innerHTML = featuredPosts.map(post => {
+                const postUrl = `/blog/${post.slug}.html`;
+                const featuredImage = post.featured_image || '/assets/default-blog-image.webp'; // Imagen por defecto
+                const excerpt = post.excerpt || 'Lee este interesante artículo...';
+
+                return `
+                    <article class="post-card" onclick="window.location.href='${postUrl}'" style="cursor: pointer;">
+                        <img src="${featuredImage}" alt="${post.title}" class="post-image" onerror="this.src='/assets/default-blog-image.webp'">
+                        <div class="post-content">
+                            ${post.category ? `<span class="post-category">${post.category}</span>` : ''}
+                            <h3 class="post-title">${post.title}</h3>
+                            <p class="post-excerpt">${excerpt}</p>
+                            <a href="${postUrl}" class="read-more">Leer más</a>
+                        </div>
+                    </article>
+                `;
+            }).join('');
+
+        } catch (error) {
+            console.error('Error cargando posts destacados:', error);
+            if (noPostsMessage) {
+                noPostsMessage.textContent = 'Error al cargar los artículos.';
+                noPostsMessage.style.display = 'block';
+            }
+        }
+    });
+</script>
 
 </body>
 </html>
