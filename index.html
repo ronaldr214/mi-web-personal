@@ -240,30 +240,26 @@
 </head>
 <body>
     <!-- Sección de Posts Destacados -->
-    <section class="featured-posts">
-        <div class="container">
-            <div class="section-title">
-                <h2>Últimos Artículos del Blog</h2>
-                <p>Descubre contenido estratégico sobre marketing digital, branding, desarrollo web e inteligencia artificial para hacer crecer tu negocio.</p>
-            </div>
-            
-            <div class="posts-grid" id="featuredPosts"><div class="posts-grid" id="featuredPosts">
-    <!-- Los posts se cargarán dinámicamente aquí -->
-</div>
-<div class="no-posts" id="noPosts" style="display: none;">
-    <h3>Próximamente</h3>
-    <p>Estoy preparando contenido increíble para ti. ¡Muy pronto tendrás acceso a artículos que te ayudarán a potenciar tu negocio!</p>
-</div>
-
-                <!-- Los posts se cargarán dinámicamente aquí -->
-            </div>
-            
-            <div class="no-posts" id="noPosts" style="display: none;">
-                <h3>Próximamente</h3>
-                <p>Estoy preparando contenido increíble para ti. ¡Muy pronto tendrás acceso a artículos que te ayudarán a potenciar tu negocio!</p>
-            </div>
+    <!-- Sección de Posts Destacados -->
+<section class="featured-posts">
+    <div class="container">
+        <div class="section-title">
+            <h2>Últimos Artículos del Blog</h2>
+            <p>Descubre contenido estratégico sobre marketing digital, branding, desarrollo web e inteligencia artificial para hacer crecer tu negocio.</p>
         </div>
-    </section>
+        
+        <!-- Este es el ÚNICO contenedor para los posts destacados -->
+        <div class="posts-grid" id="featuredPosts">
+            <!-- Los posts se cargarán dinámicamente aquí por el script -->
+        </div>
+        
+        <!-- Este es el ÚNICO mensaje de "no posts" -->
+        <div class="no-posts" id="noPosts" style="display: none;">
+            <h3>Próximamente</h3>
+            <p>Estoy preparando contenido increíble para ti. ¡Muy pronto tendrás acceso a artículos que te ayudarán a potenciar tu negocio!</p>
+        </div>
+    </div>
+</section>
 
    <!-- Asegúrate de que este script esté después de la sección de posts destacados -->
 <script src="assets/wordpress-blog.js"></script>
